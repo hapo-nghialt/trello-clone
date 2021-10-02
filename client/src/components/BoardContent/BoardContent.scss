@@ -1,0 +1,63 @@
+@import '_setting';
+
+.board-content {
+  height: $board-content-height;
+  display: flex;
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  &:after {
+    content: '';
+    flex: 0 0 $gap;
+  }
+
+  &::-webkit-scrollbar {
+    -webkit-appearance: none;
+  }
+
+  &::-webkit-scrollbar:horizontal {
+    height: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, .24);
+    border-radius: 5px;
+  }
+
+  .column-drop-preview {
+    background-color: rgba(150, 150, 200, 0.1);
+    border: 1px dashed #abc;
+    margin: 5px 45px 5px 5px;
+  }
+
+  .add-new-column {
+    width: 250px;
+    max-width: 250px;
+    line-height: 32px;
+    cursor: pointer;
+    color: #172b4d;
+    margin-left: $gap;
+    font-size: 15px;
+    padding: 4px 10px;
+    background-color: hsla(0, 0%, 100%, .24);
+    border-radius: 5px;
+
+    &:hover {
+      background-color: hsla(0, 0%, 100%, .34);
+    }
+  }
+
+  .enter-new-column {
+    width: 250px;
+    max-width: 250px;
+    background-color: $column-bg-color;
+    margin-left: $gap;
+    line-height: 32px;
+    padding: 4px 10px;
+    border-radius: 5px;
+
+    input.input-enter-new-column {
+      margin: 5px 0;
+    }
+  }
+}

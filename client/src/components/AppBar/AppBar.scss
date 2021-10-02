@@ -1,0 +1,9 @@
+@import '_setting.scss';
+
+.navbar-app {
+  height: $navbar-app-height;
+  background-color: rgba(0, 0, 0, 0.32);
+  padding-left: $gap;
+  display: flex;
+  align-items: center;
+}
