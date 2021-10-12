@@ -5,3 +5,6 @@ export const HttpStatusCode = {
   NOT_FOUND: 404,
   INTERNAL_SERVER_ERROR: 500
 }
+
+export const minCardLength = 3
+export const maxCardLength = 30
