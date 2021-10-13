@@ -29,6 +29,24 @@ const createNew = async (data) => {
   }
 }
 
+/**
+ * @param {string} columnId
+ * @param {string} cardId
+ */
+const pushCardOrder = async (columnId, cardId) => {
+  try {
+    const result = await getDB().collection(columnCollectionName).findOneAndUpdate(
+      { _id: ObjectID(columnId) },
+      { $push: { cardOrder: cardId } },
+      { returnOriginal: false }
+    )
+
+    return result.value
+  } catch (error) {
+    throw new Error(error)
+  }
+}
+
 const update = async (id, data) => {
   try {
     const result = await getDB().collection(columnCollectionName).findOneAndUpdate(
@@ -43,4 +61,9 @@ const update = async (id, data) => {
   }
 }
 
-export const ColumnModel = { createNew, update }
+export const ColumnModel = {
+  columnCollectionName,
+  createNew,
+  pushCardOrder,
+  update
+}

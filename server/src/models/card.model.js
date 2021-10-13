@@ -29,4 +29,4 @@ const createNew = async (data) => {
   }
 }
 
-export const CardModel = { createNew }
+export const CardModel = { cardCollectionName, createNew }
