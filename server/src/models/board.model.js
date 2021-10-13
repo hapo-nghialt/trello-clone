@@ -1,6 +1,8 @@
 import Joi from 'joi'
 import { ObjectID } from 'mongodb'
 import { getDB } from '../config/mongodb'
+import { ColumnModel } from './column.model'
+import { CardModel } from './card.model'
 
 const boardCollectionName = 'boards'
 const boardCollectionSchema = Joi.object({
@@ -50,19 +52,18 @@ const getFullBoard = async (boardId) => {
       { $match: { _id: ObjectID(boardId) } },
       { $addFields: { _id: { $toString: '$_id' } } },
       { $lookup: {
-        from: 'columns',
+        from: ColumnModel.columnCollectionName,
         localField: '_id',
         foreignField: 'boardId',
         as: 'columns'
       } },
       { $lookup: {
-        from: 'cards',
+        from: CardModel.cardCollectionName,
         localField: '_id',
         foreignField: 'boardId',
         as: 'cards'
       } }
     ]).toArray()
-    console.log(result[0] || {})
 
     return result[0] || {}
   } catch (error) {

@@ -61,4 +61,9 @@ const update = async (id, data) => {
   }
 }
 
-export const ColumnModel = { createNew, pushCardOrder, update }
+export const ColumnModel = {
+  columnCollectionName,
+  createNew,
+  pushCardOrder,
+  update
+}
