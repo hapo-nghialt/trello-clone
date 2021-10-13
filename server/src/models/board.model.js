@@ -1,4 +1,5 @@
 import Joi from 'joi'
+import { ObjectID } from 'mongodb'
 import { getDB } from '../config/mongodb'
 
 const boardCollectionName = 'boards'
@@ -25,4 +26,32 @@ const createNew = async (data) => {
   }
 }
 
-export const BoardModel = { createNew }
+const getFullBoard = async (boardId) => {
+  try {
+    const result = await getDB().collection(boardCollectionName).aggregate([
+      {
+        $match: { _id: ObjectID(boardId) }
+      },
+      {
+        $addFields: {
+          _idTest: { $toString: '$_id' }
+        }
+      },
+      {
+        $lookup: {
+          from: 'columns',
+          localField: '_idTest',
+          foreignField: 'boardId',
+          as: 'columns'
+        }
+      }
+    ]).toArray()
+    console.log(result)
+
+    return result
+  } catch (error) {
+    throw new Error(error)
+  }
+}
+
+export const BoardModel = { createNew, getFullBoard }
