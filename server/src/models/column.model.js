@@ -7,7 +7,6 @@ const columnCollectionSchema = Joi.object({
   boardId: Joi.string().required(),
   title: Joi.string().required().min(3).max(20).trim(),
   cardOrder: Joi.array().items(Joi.string()).default([]),
-  cards: Joi.array().items(Joi.object()).default([]),
   createdAt: Joi.date().timestamp().default(Date.now()),
   updatedAt: Joi.date().timestamp().default(null),
   _destroy: Joi.boolean().default(false)
@@ -55,7 +54,6 @@ const update = async (id, data) => {
       { returnOriginal: false }
     )
     return result.value
-
   } catch (error) {
     throw new Error(error)
   }

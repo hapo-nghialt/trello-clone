@@ -10,10 +10,10 @@ import { MODAL_ACTION_CONFIRM } from 'utilities/constants'
 import { saveContentAfterPressEnter, selectAllInlineText } from 'utilities/contentEditable'
 
 import { cloneDeep } from 'lodash'
-import { createNewCard } from 'actions/Api'
+import { createNewCard, updateColumn } from 'actions/Api'
 
 export default function Column(props) {
-  const { column, onCardDrop, onUpdateColumn } = props
+  const { column, onCardDrop, onUpdateColumnState } = props
 
   const cards = mapOrder(column.cards, column.cardOrder, '_id')
 
@@ -45,6 +45,7 @@ export default function Column(props) {
     setColumnTitle(column.title)
   }, [column.title])
 
+  // Remove column
   const onConfirmModalAction = (type) => {
     if (type === MODAL_ACTION_CONFIRM) {
       const newColumn = {
@@ -52,19 +53,29 @@ export default function Column(props) {
         _destroy: true
       }
 
-      onUpdateColumn(newColumn)
+      // remove column
+      updateColumn(newColumn._id, newColumn)
+      onUpdateColumnState(newColumn)
     }
 
     toggleShowConfirmModal()
   }
 
+  // Update column title
   const handleColumnTitleBlur = () => {
-    const newColumn = {
-      ... column,
-      title: columnTitle
-    }
+    if (columnTitle !== column.title) {
 
-    onUpdateColumn(newColumn)
+      const newColumn = {
+        ... column,
+        title: columnTitle
+      }
+
+      // call API update column
+      updateColumn(newColumn._id, newColumn).then(updatedColumn => {
+        updatedColumn.cards = newColumn.cards
+      })
+      onUpdateColumnState(newColumn)
+    }
   }
 
   const addNewCard = () => {
@@ -87,7 +98,7 @@ export default function Column(props) {
       setNewCardTitle('')
       newCardTextareaRef.current.focus()
 
-      onUpdateColumn(newColumn)
+      onUpdateColumnState(newColumn)
       toggleOpenNewCardForm()
     })
   }

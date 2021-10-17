@@ -23,7 +23,7 @@ export default function BoardContent() {
   const onNewColumnTitleChange = (e) => setNewColumnTitle(e.target.value)
 
   useEffect(() => {
-    const boardId = '6163293c31a9530ed6a0376c'
+    const boardId = '616b981d4c03363830e488af'
     fetchBoardDetails(boardId).then(board => {
       setBoard(board)
       setColumns(mapOrder(board.columns, board.columnOrder, '_id'))
@@ -91,7 +91,7 @@ export default function BoardContent() {
     })
   }
 
-  const onUpdateColumn = (newColumnToUpdate) => {
+  const onUpdateColumnState = (newColumnToUpdate) => {
     const columnIdToUpdate = newColumnToUpdate._id
 
     let newColumns = [...columns]
@@ -101,6 +101,7 @@ export default function BoardContent() {
       // remove column
       newColumns.splice(indexColumnToUpdate, 1)
       setColumns(newColumns)
+      console.log(columns)
     } else {
       // update column info
       newColumns.splice(indexColumnToUpdate, 1, newColumnToUpdate)
@@ -132,7 +133,7 @@ export default function BoardContent() {
             <Column
               column={column}
               onCardDrop={onCardDrop}
-              onUpdateColumn={onUpdateColumn}
+              onUpdateColumnState={onUpdateColumnState}
             />
           </Draggable>
         ))}
