@@ -1,10 +1,14 @@
-import express from 'express'
-import cors from 'cors'
-import { connectDB } from '@/config/mongodb'
+// import express from 'express'
+// import cors from 'cors'
+// import { connectDB } from '@/config/mongodb'
 import { api } from '@/routes/v1'
-import mongoose from 'mongoose'
+// import mongoose from 'mongoose'
+
 
 require('dotenv').config()
+const express = require('express')
+const mongoose = require('mongoose')
+const cors = require('cors')
 
 const hostname = process.env.APP_HOST
 const port = process.env.APP_PORT
@@ -33,11 +37,27 @@ const uri = process.env.MONGODB_URI
 //   })
 // }
 
-mongoose.connect(uri, { useNewUrlParser: true })
-  .then(() => {
-    const app = express()
-
-    app.listen(port, hostname, () => {
-      console.log(`Server starting at ${hostname}:${port}`)
+const connectDB = async () => {
+  try {
+    await mongoose.connect(uri, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true
     })
-  })
+
+    console.log('MongoDB connected')
+  } catch (error) {
+    console.log(error.message)
+    process.exit(1)
+  }
+}
+
+connectDB()
+
+const app = express()
+app.use(cors())
+
+app.use('/v1', api)
+
+app.listen(port, hostname, () => {
+  console.log(`Server starting at ${hostname}:${port}`)
+})
