@@ -23,7 +23,7 @@ export default function BoardContent() {
   const onNewColumnTitleChange = (e) => setNewColumnTitle(e.target.value)
 
   useEffect(() => {
-    const boardId = '616b981d4c03363830e488af'
+    const boardId = '616c4f952de08ab25aeb332f'
     fetchBoardDetails(boardId).then(board => {
       setBoard(board)
       setColumns(mapOrder(board.columns, board.columnOrder, '_id'))
