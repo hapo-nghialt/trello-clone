@@ -101,7 +101,6 @@ export default function BoardContent() {
       // remove column
       newColumns.splice(indexColumnToUpdate, 1)
       setColumns(newColumns)
-      console.log(columns)
     } else {
       // update column info
       newColumns.splice(indexColumnToUpdate, 1, newColumnToUpdate)
