@@ -14,10 +14,10 @@ router.get('/status', (req, res) => {
 // Boards
 router.use('/boards', boardRoutes)
 
-// // Columns
-// router.use('/columns', columnRoutes)
+// Columns
+router.use('/columns', columnRoutes)
 
-// // Cards
-// router.use('/cards', cardRoutes)
+// Cards
+router.use('/cards', cardRoutes)
 
 export const api = router
