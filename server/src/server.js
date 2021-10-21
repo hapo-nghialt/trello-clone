@@ -30,10 +30,3 @@ const bootServer = () => {
     console.log(`Server starting at ${hostname}:${port}`)
   })
 }
-
-connectDB()
-
-const app = express()
-app.use(cors())
-
-app.use('/v1', api)
