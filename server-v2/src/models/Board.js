@@ -1,7 +1,7 @@
 import mongoose from 'mongoose'
-const Schema = mongoose.Schema;
+const Schema = mongoose.Schema
 
-let boardSchema = new Schema({
+let Board = new Schema({
   title: {
     type: String,
     required: true,
@@ -25,6 +25,8 @@ let boardSchema = new Schema({
     type: Boolean,
     default: false
   }
+}, {
+  versionKey: false
 })
 
-export const BoardModel = mongoose.model('Board', boardSchema)
+export const BoardModel = mongoose.model('Board', Board)
