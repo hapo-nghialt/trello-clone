@@ -36,7 +36,19 @@ const updateColumnOrder = async (boardId, columnId) => {
   }
 }
 
+const getFullBoard = async (req, res) => {
+  try {
+    const id = req.params.id
+    
+  } catch (error) {
+    return res.status(500).json({
+      errors: error.message
+    })
+  }
+}
+
 export const BoardController = {
   store,
-  updateColumnOrder
+  updateColumnOrder,
+  getFullBoard
 }
