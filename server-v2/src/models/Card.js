@@ -2,11 +2,11 @@ import mongoose from 'mongoose'
 const Schema = mongoose.Schema
 
 let Card = new Schema({
-  board: {
+  boardId: {
     type: Schema.Types.ObjectId,
     ref: 'Board'
   },
-  column: {
+  columnId: {
     type: Schema.Types.ObjectId,
     ref: 'Column'
   },

@@ -16,10 +16,6 @@ connect(process.env.MONGODB_URI, {
 
 app.use(json())
 
-app.get('/', (req, res) => {
-  res.send(`<h1>Hello world</h1>`)
-})
-
 app.use('/api', router)
 
 app.listen(port, hostname, () => {

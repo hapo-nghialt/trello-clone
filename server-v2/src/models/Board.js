@@ -10,8 +10,9 @@ let Board = new Schema({
     trim: true
   },
   columnOrder: {
-    type: Array,
-    default: []
+    type: Schema.Types.Array,
+    default: [],
+    ref: 'Column'
   },
   createdAt: {
     type: Date,

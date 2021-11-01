@@ -2,7 +2,7 @@ import mongoose from 'mongoose'
 const Schema = mongoose.Schema
 
 let Column = new Schema({
-  board: {
+  boardId: {
     type: Schema.Types.ObjectId,
     ref: 'Board'
   },
@@ -14,8 +14,9 @@ let Column = new Schema({
     trim: true
   },
   cardOrder: {
-    type: Array,
-    default: []
+    type: Schema.Types.Array,
+    default: [],
+    ref: 'Card'
   },
   createdAt: {
     type: Date,
