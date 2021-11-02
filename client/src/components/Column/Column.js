@@ -62,7 +62,7 @@ export default function Column(props) {
 
   // Update column title
   const handleColumnTitleBlur = () => {
-    if (columnTitle !== column.title) {
+    if (columnTitle !== column.title && columnTitle !== '') {
 
       const newColumn = {
         ... column,
@@ -72,6 +72,8 @@ export default function Column(props) {
       // call API update column
       updateColumn(newColumn._id, newColumn)
       onUpdateColumnState(newColumn)
+    } else if (columnTitle === '') {
+      setColumnTitle(column.title)
     }
   }
 
