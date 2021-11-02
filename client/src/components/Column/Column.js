@@ -91,8 +91,7 @@ export default function Column(props) {
 
     createNewCard(newCardToAdd).then(card => {
       let newColumn = cloneDeep(column)
-      newColumn.cards.push(card)
-      newColumn.cardOrder.push(card._id)
+      newColumn.cardOrder.push(card)
 
       setNewCardTitle('')
       newCardTextareaRef.current.focus()
