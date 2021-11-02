@@ -1,5 +1,4 @@
 import { validationResult } from 'express-validator'
-import { ColumnModel } from '../models/Column'
 import { ColumnService } from '../services/ColumnService'
 
 const store = async (req, res) => {
@@ -17,8 +16,16 @@ const store = async (req, res) => {
   }
 }
 
-const update = () => {
-
+const update = async (req, res) => {
+  try {
+    const id = req.params.id
+    const result = await ColumnService.update(id, req.body)
+    return res.status(200).json(result)
+  } catch (error) {
+    return res.status(500).json({
+      errors: error.message
+    })
+  }
 }
 
 export const ColumnController = {

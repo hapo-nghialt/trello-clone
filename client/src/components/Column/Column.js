@@ -70,9 +70,7 @@ export default function Column(props) {
       }
 
       // call API update column
-      updateColumn(newColumn._id, newColumn).then(updatedColumn => {
-        updatedColumn.cards = newColumn.cards
-      })
+      updateColumn(newColumn._id, newColumn)
       onUpdateColumnState(newColumn)
     }
   }

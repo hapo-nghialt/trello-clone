@@ -8,7 +8,7 @@ import { applyDrag } from 'utilities/dragDrop'
 import { Container, Draggable } from 'react-smooth-dnd'
 
 import { Container as BootstrapContainer, Row, Col, Form, Button } from 'react-bootstrap'
-import { createNewColumn, fetchBoardDetails, updateBoard } from 'actions/Api'
+import { createNewColumn, fetchBoardDetails, updateBoard, updateColumn } from 'actions/Api'
 
 export default function BoardContent() {
   const [board, setBoard] = useState({})
@@ -59,8 +59,9 @@ export default function BoardContent() {
 
       let currentColumn = newColumns.find(c => c._id === columnId)
       currentColumn.cardOrder = applyDrag(currentColumn.cardOrder, dropResult)
-      // currentColumn.cardOrder = currentColumn.cards.map(i => i._id)
       setColumns(newColumns)
+
+      updateColumn(currentColumn._id, currentColumn)
     }
   }
 

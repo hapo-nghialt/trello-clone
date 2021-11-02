@@ -11,7 +11,6 @@ router.post(
 
 router.put(
   '/:id',
-  ColumnValidation.update(),
   ColumnController.update
 )
 

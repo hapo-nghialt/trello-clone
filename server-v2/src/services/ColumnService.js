@@ -1,5 +1,6 @@
 import { ColumnModel } from "../models/Column"
 import { BoardService } from "./BoardService"
+import { ObjectID } from "mongodb";
 
 const store = async (data)  => {
   try {
@@ -25,7 +26,27 @@ const updateCardOrder = async (columnId, cardId) => {
   }
 }
 
+const update = async (id, data) => {
+  try {
+    const updatedData = {
+      ...data,
+      cardOrder: data.cardOrder.map($i => ObjectID($i._id)),
+      updatedAt: Date.now()
+    }
+    delete updatedData.boardId, updatedData.columnId
+
+    const result = await ColumnModel.findOneAndUpdate(
+      { _id: id },
+      updatedData
+    )
+    return result
+  } catch (error) {
+    throw new Error(error)
+  }
+}
+
 export const ColumnService = {
   store,
   updateCardOrder,
+  update
 }
