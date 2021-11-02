@@ -3,7 +3,6 @@ import ConfirmModal from 'components/Common/ConfirmModal'
 import React, { useEffect, useRef, useState } from 'react'
 import './Column.scss'
 
-import { mapOrder } from 'utilities/sorts'
 import { Container, Draggable } from 'react-smooth-dnd'
 import { Button, Dropdown, Form } from 'react-bootstrap'
 import { MODAL_ACTION_CONFIRM } from 'utilities/constants'
@@ -15,7 +14,7 @@ import { createNewCard, updateColumn } from 'actions/Api'
 export default function Column(props) {
   const { column, onCardDrop, onUpdateColumnState } = props
 
-  const cards = mapOrder(column.cards, column.cardOrder, '_id')
+  const cards = column.cardOrder
 
   const [showConfirmModal, setShowConfirmModal] = useState(false)
   const toggleShowConfirmModal = () => setShowConfirmModal(!showConfirmModal)

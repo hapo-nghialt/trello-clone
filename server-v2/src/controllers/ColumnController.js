@@ -17,6 +17,11 @@ const store = async (req, res) => {
   }
 }
 
+const update = () => {
+
+}
+
 export const ColumnController = {
-  store
+  store,
+  update
 }

@@ -1,4 +1,5 @@
 import express, { json } from 'express'
+import cors from 'cors'
 import { connect } from 'mongoose'
 import router from './routes'
 const app = express()
@@ -13,6 +14,8 @@ connect(process.env.MONGODB_URI, {
 })
 .then(res => console.log(`Connect successful ${res}`))
 .catch(res => console.log(`Error in DB connection ${res}`))
+
+app.use(cors())
 
 app.use(json())
 

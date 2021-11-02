@@ -14,4 +14,9 @@ router.get(
   BoardController.getFullBoard
 )
 
+router.put(
+  '/:id/update',
+  BoardController.update
+)
+
 export const boardRoutes = router

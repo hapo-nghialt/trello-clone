@@ -9,4 +9,10 @@ router.post(
   ColumnController.store
 )
 
+router.put(
+  '/:id',
+  ColumnValidation.update(),
+  ColumnController.update
+)
+
 export const columnRoutes = router

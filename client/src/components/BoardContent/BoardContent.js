@@ -3,7 +3,6 @@ import React, { useEffect, useRef, useState } from 'react'
 import { isEmpty } from 'lodash'
 import './BoardContent.scss'
 
-import { mapOrder } from 'utilities/sorts'
 import { applyDrag } from 'utilities/dragDrop'
 
 import { Container, Draggable } from 'react-smooth-dnd'
@@ -23,10 +22,10 @@ export default function BoardContent() {
   const onNewColumnTitleChange = (e) => setNewColumnTitle(e.target.value)
 
   useEffect(() => {
-    const boardId = '616c4f952de08ab25aeb332f'
+    const boardId = '6180255aecd10779f9415462'
     fetchBoardDetails(boardId).then(board => {
       setBoard(board)
-      setColumns(mapOrder(board.columns, board.columnOrder, '_id'))
+      setColumns(board.columnOrder)
     })
   }, [])
 
@@ -46,8 +45,7 @@ export default function BoardContent() {
     newColumns = applyDrag(newColumns, dropResult)
 
     let newBoard = { ...board }
-    newBoard.columnOrder = newColumns.map(c => c._id)
-    newBoard.columns = newColumns
+    newBoard.columnOrder = newColumns
 
     setColumns(newColumns)
     setBoard(newBoard)
@@ -58,8 +56,8 @@ export default function BoardContent() {
       let newColumns = [ ...columns ]
 
       let currentColumn = newColumns.find(c => c._id === columnId)
-      currentColumn.cards = applyDrag(currentColumn.cards, dropResult)
-      currentColumn.cardOrder = currentColumn.cards.map(i => i._id)
+      currentColumn.cardOrder = applyDrag(currentColumn.cardOrder, dropResult)
+      // currentColumn.cardOrder = currentColumn.cards.map(i => i._id)
       setColumns(newColumns)
     }
   }

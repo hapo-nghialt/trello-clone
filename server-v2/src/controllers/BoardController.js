@@ -28,7 +28,12 @@ const getFullBoard = async (req, res) => {
   }
 }
 
+const update = async (req, res) => {
+  const id = req.params.id
+}
+
 export const BoardController = {
   store,
-  getFullBoard
+  getFullBoard,
+  update
 }
