@@ -1,5 +1,6 @@
 import { validationResult } from 'express-validator'
 import { BoardService } from '../services/BoardService'
+// import {BoardModel} from "../models/Board";
 
 const store = async (req, res) => {
   const errors = validationResult(req)
@@ -30,6 +31,12 @@ const getFullBoard = async (req, res) => {
 
 const update = async (req, res) => {
   const id = req.params.id
+  // const result = await BoardModel.findOneAndReplace(
+  //   { id: id },
+  //   req.body
+  // )
+  // console.log(result.value)
+  // const result = await BoardService.update(id)
 }
 
 export const BoardController = {

@@ -8,7 +8,7 @@ import { applyDrag } from 'utilities/dragDrop'
 import { Container, Draggable } from 'react-smooth-dnd'
 
 import { Container as BootstrapContainer, Row, Col, Form, Button } from 'react-bootstrap'
-import { createNewColumn, fetchBoardDetails } from 'actions/Api'
+import { createNewColumn, fetchBoardDetails, updateBoard } from 'actions/Api'
 
 export default function BoardContent() {
   const [board, setBoard] = useState({})
@@ -49,6 +49,8 @@ export default function BoardContent() {
 
     setColumns(newColumns)
     setBoard(newBoard)
+
+    updateBoard(board._id, newBoard)
   }
 
   const onCardDrop = (columnId, dropResult) => {

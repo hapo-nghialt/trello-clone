@@ -39,8 +39,13 @@ const getFullBoard = async (id) => {
   }
 }
 
+const update = async (id, data) => {
+
+}
+
 export const BoardService = {
   store,
   updateColumnOrder,
-  getFullBoard
+  getFullBoard,
+  update
 }
