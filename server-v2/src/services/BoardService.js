@@ -1,4 +1,5 @@
 import { BoardModel } from "../models/Board"
+import { ObjectID } from "mongodb";
 
 const store = async (data) => {
   try {
@@ -40,7 +41,22 @@ const getFullBoard = async (id) => {
 }
 
 const update = async (id, data) => {
+  try {
+    const updatedData = {
+      ...data,
+      columnOrder: data.columnOrder.map($i => ObjectID($i._id)),
+      updatedAt: Date.now()
+    }
 
+    const result = await BoardModel.findOneAndUpdate(
+      { _id: id },
+      updatedData
+    )
+
+    return result
+  } catch (error) {
+    throw new Error(error)
+  }
 }
 
 export const BoardService = {

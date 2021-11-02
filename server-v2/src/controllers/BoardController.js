@@ -30,13 +30,15 @@ const getFullBoard = async (req, res) => {
 }
 
 const update = async (req, res) => {
-  const id = req.params.id
-  // const result = await BoardModel.findOneAndReplace(
-  //   { id: id },
-  //   req.body
-  // )
-  // console.log(result.value)
-  // const result = await BoardService.update(id)
+  try {
+    const id = req.params.id
+    const result = await BoardService.update(id, req.body)
+    res.status(200).json(result)
+  } catch (error) {
+    return res.status(500).json({
+      errors: error.message
+    })
+  }
 }
 
 export const BoardController = {
