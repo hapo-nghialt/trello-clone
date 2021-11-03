@@ -7,7 +7,7 @@ $column-height: calc(#{$board-content-height} - #{$gap * 2});
 
 .column {
   flex: 0 0 auto;
-  width: 300px;
+  width: 270px;
   height: $column-height;
   margin-left: $gap;
 
