@@ -35,6 +35,9 @@ const update = async (id, data) => {
     }
     delete updatedData.boardId, updatedData.columnId
 
+    if (updatedData._destroy) {
+    }
+
     const result = await ColumnModel.findOneAndUpdate(
       { _id: id },
       updatedData

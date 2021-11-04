@@ -67,10 +67,13 @@ $column-height: calc(#{$board-content-height} - #{$gap * 2});
         a.dropdown-item {
           padding: 6px 12px;
           font-size: 14px;
+        }
 
-          &:not(:last-child) {
-            border-bottom: 1px solid darken($column-bg-color, 10);
-          }
+        .dropdown-header {
+          text-align: center;
+          padding: 10px;
+          padding-bottom: 0;
+          font-weight: 600;
         }
       }
     }

@@ -27,9 +27,10 @@ const updateColumnOrder = async (boardId, columnId) => {
 const getFullBoard = async (id) => {
   try {
     const board = await BoardModel.findOne({
-      _id: id
+      _id: id,
     }).populate({
       path: 'columnOrder',
+      match: { _destroy: false },
       populate: [
         { path: 'cardOrder' },
     ]
