@@ -13,7 +13,7 @@ body {
 
 .trello-web {
   height: 100vh;
-  background: url('assets/img/background.jpg');
+  // background: url('assets/img/background.jpg');
   background-position: 50%;
   background-size: cover;
   color: $app-main-text-color;
@@ -31,8 +31,6 @@ body {
   textarea:focus,
   textarea.form-control:focus,
   input.form-control:focus,
-  input[type=text]:focus,
-  input[type=password]:focus,
   input[type=email]:focus,
   input[type=number]:focus,
   [type=text].form-control:focus,

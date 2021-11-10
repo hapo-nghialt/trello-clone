@@ -1,4 +1,5 @@
 import express from 'express'
+import { authRoutes } from './auth'
 import { boardRoutes } from './board'
 import { cardRoutes } from './card'
 import { columnRoutes } from './column'
@@ -14,5 +15,7 @@ router.use('/boards', boardRoutes)
 router.use('/columns', columnRoutes)
 
 router.use('/cards', cardRoutes)
+
+router.use('/auth', authRoutes)
 
 module.exports = router
