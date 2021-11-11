@@ -1,5 +1,6 @@
 import { Router } from 'express'
 import { AuthController } from '../controllers/AuthController';
+import { AuthValidation } from '../validations/Auth';
 
 const router = Router();
 
@@ -10,6 +11,7 @@ router.post(
 
 router.post(
   '/register',
+  AuthValidation.register(),
   AuthController.register
 )
 

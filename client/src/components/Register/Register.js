@@ -5,11 +5,9 @@ import React from 'react'
 
 function Register() {
   const onFinish = async (values) => {
-    try {
-      const registerData = await register(values)
-      console.log(registerData)
-    } catch (error) {
-      console.log(error)
+    const registerData = await register(values)
+    if (registerData.errors) {
+      console.log(registerData.errors[0].msg)
     }
   }
 
@@ -25,19 +23,19 @@ function Register() {
       className="pt-4"
       onFinish={onFinish}
     >
-<Form.Item
+      <Form.Item
         label="Username"
         name="username"
         rules={[
-          {
-            required: true,
-            message: 'Please input your username!'
-          },
-          {
-            min: 3,
-            max: 20,
-            message: 'Username between 3 and 20 characters!'
-          }
+          // {
+          //   required: true,
+          //   message: 'Please input your username!'
+          // },
+          // {
+          //   min: 3,
+          //   max: 20,
+          //   message: 'Username between 3 and 20 characters!'
+          // }
         ]}
       >
         <Input />

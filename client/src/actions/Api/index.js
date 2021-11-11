@@ -34,6 +34,10 @@ export const login = async (data) => {
 }
 
 export const register = async (data) => {
-  const response = await axios.post(`${API_ROOT}/auth/register`, data)
-  return response.data
+  try {
+    const response = await axios.post(`${API_ROOT}/auth/register`, data)
+    return response.data
+  } catch (error) {
+    if (error.response.data) return error.response.data
+  }
 }
