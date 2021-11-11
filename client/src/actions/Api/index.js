@@ -3,27 +3,37 @@ import { API_ROOT } from 'utilities/constants'
 const axios = require('axios')
 
 export const fetchBoardDetails = async (id) => {
-  const request = await axios.get(`${API_ROOT}/api/boards/${id}`)
-  return request.data
+  const response = await axios.get(`${API_ROOT}/boards/${id}`)
+  return response.data
 }
 
 export const updateBoard = async (id, data) => {
-  const request = await axios.put(`${API_ROOT}/api/boards/${id}/update`, data)
-  return request.data
+  const response = await axios.put(`${API_ROOT}/boards/${id}/update`, data)
+  return response.data
 }
 
 export const createNewColumn = async (data) => {
-  const request = await axios.post(`${API_ROOT}/api/columns/store`, data)
-  return request.data
+  const response = await axios.post(`${API_ROOT}/columns/store`, data)
+  return response.data
 }
 
 // update or remove column
 export const updateColumn = async (id, data) => {
-  const request = await axios.put(`${API_ROOT}/api/columns/${id}`, data)
-  return request.data
+  const response = await axios.put(`${API_ROOT}/columns/${id}`, data)
+  return response.data
 }
 
 export const createNewCard = async (data) => {
-  const request = await axios.post(`${API_ROOT}/api/cards/store`, data)
-  return request.data
+  const response = await axios.post(`${API_ROOT}/cards/store`, data)
+  return response.data
+}
+
+export const login = async (data) => {
+  const response = await axios.post(`${API_ROOT}/auth/login`, data)
+  return response.data
+}
+
+export const register = async (data) => {
+  const response = await axios.post(`${API_ROOT}/auth/register`, data)
+  return response.data
 }

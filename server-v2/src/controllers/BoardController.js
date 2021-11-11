@@ -1,6 +1,5 @@
 import { validationResult } from 'express-validator'
 import { BoardService } from '../services/BoardService'
-// import {BoardModel} from "../models/Board";
 
 const store = async (req, res) => {
   const errors = validationResult(req)
