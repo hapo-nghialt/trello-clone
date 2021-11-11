@@ -1,4 +1,4 @@
-import Card from 'components/Card/Card'
+import Card from 'components/BoardDetail/Card/Card'
 import ConfirmModal from 'components/Common/ConfirmModal'
 import React, { useEffect, useRef, useState } from 'react'
 import './Column.scss'

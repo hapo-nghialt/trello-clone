@@ -32,7 +32,10 @@ const getFullBoard = async (id) => {
       path: 'columnOrder',
       match: { _destroy: false },
       populate: [
-        { path: 'cardOrder' },
+        {
+          path: 'cardOrder',
+          match: { _destroy: false }
+        },
     ]
     })
     return board

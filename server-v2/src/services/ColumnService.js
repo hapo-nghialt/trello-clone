@@ -1,6 +1,7 @@
 import { ColumnModel } from "../models/Column"
 import { BoardService } from "./BoardService"
 import { ObjectID } from "mongodb";
+import { CardService } from "./CardService";
 
 const store = async (data)  => {
   try {
@@ -36,6 +37,7 @@ const update = async (id, data) => {
     delete updatedData.boardId, updatedData.columnId
 
     if (updatedData._destroy) {
+      CardService.deleteMany(updatedData.cardOrder)
     }
 
     const result = await ColumnModel.findOneAndUpdate(

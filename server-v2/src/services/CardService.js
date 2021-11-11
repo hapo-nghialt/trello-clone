@@ -12,4 +12,26 @@ const store = async (data) => {
   }
 }
 
-export const CardService = { store }
+const deleteMany = async (cards) => {
+  console.log(cards);
+  try {
+    const result = await CardModel.updateMany(
+      { _id: { $in: cards } },
+      { $set:
+        {
+          _destroy: true,
+          updatedAt: Date.now()
+        }
+      },  
+      { multi: true }
+    )
+    return result
+  } catch (error) {
+    throw new Error(error)
+  }
+}
+
+export const CardService = {
+  store,
+  deleteMany
+}

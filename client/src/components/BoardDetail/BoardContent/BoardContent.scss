@@ -60,4 +60,8 @@
       margin: 5px 0;
     }
   }
+
+  & > .smooth-dnd-container > .smooth-dnd-drop-preview-constant-class {
+    width: 320px !important;
+  }
 }
