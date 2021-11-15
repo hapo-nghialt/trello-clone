@@ -6,17 +6,14 @@ import { Toast } from 'react-bootstrap'
 import './Register.scss'
 
 function Register() {
+  const [showToast, setShowToast] = useState(false)
+
   const onFinish = async (values) => {
     const registerData = await register(values)
     if (registerData.errors) {
       console.log(registerData.errors[0].msg)
+      setShowToast(!showToast)
     }
-  }
-
-  const [showToast, setShowToast] = useState(false)
-
-  const handleShowToast = () => {
-    setShowToast(!showToast)
   }
 
   return (
@@ -71,7 +68,7 @@ function Register() {
                 placeholder='Enter your password'
               />
             </Form.Item>
-            <Button type='primary' htmlType='submit' onClick={handleShowToast}>
+            <Button type='primary' htmlType='submit'>
               Submit
             </Button>
           </Form>
