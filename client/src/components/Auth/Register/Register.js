@@ -22,47 +22,34 @@ function Register() {
         <Card
           className='register-card'
           title='Đăng nhập vào Trello'
-          style={{
-            textAlign: 'center'
-          }}
         >
           <Form
-            name='basic'
-            labelCol={{
-              span: 4
-            }}
-            wrapperCol={{
-              span: 16
-            }}
             onFinish={onFinish}
           >
             <Form.Item
               name='username'
-              rules={[
-                {
-                  required: true,
-                  message: 'Please input your username!'
-                },
-                {
-                  min: 3,
-                  max: 20,
-                  message: 'Username between 3 and 20 characters!'
-                }
-              ]}
-              style={{
-                width: '100%'
-              }}
+              // rules={[
+              //   {
+              //     required: true,
+              //     message: 'Please input your username!'
+              //   },
+              //   {
+              //     min: 3,
+              //     max: 20,
+              //     message: 'Username between 3 and 20 characters!'
+              //   }
+              // ]}
             >
               <Input placeholder='Enter your username'/>
             </Form.Item>
             <Form.Item
               name='password'
-              rules={[
-                {
-                  required: true,
-                  message: 'Please input your password!'
-                }
-              ]}
+              // rules={[
+              //   {
+              //     required: true,
+              //     message: 'Please input your password!'
+              //   }
+              // ]}
             >
               <Input.Password
                 placeholder='Enter your password'

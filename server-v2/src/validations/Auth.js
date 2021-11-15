@@ -9,7 +9,8 @@ const register = () => {
           return Promise.reject('Username already taken')
         }
       })
-    })
+    }),
+    body('username', 'Username is between 3 and 20 characters').isLength({ min: 3, max: 20 })
   ]
 }
 
