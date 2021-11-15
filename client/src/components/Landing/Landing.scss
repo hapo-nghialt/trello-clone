@@ -1,0 +1,24 @@
+.landing {
+  background: linear-gradient(rgb(234, 230, 255), rgb(255, 255, 255)) no-repeat;
+  .landing-top-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    img {
+      width: 500px;
+    }
+  }
+
+  .auth-actions {
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .login-btn {
+      background-color: green;
+      color: #ffffff;
+      margin-right: 20px;
+    }
+  }
+}
