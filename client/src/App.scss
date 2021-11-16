@@ -9,11 +9,11 @@ body {
   font-size: 14px;
   line-height: 1.3em;
   font-family: 'Source Sans Pro', sans-serif;
+  background: linear-gradient(rgb(234, 230, 255), rgb(255, 255, 255)) no-repeat;
 }
 
 .trello-web {
   height: 100vh;
-  // background: url('assets/img/background.jpg');
   background-position: 50%;
   background-size: cover;
   color: $app-main-text-color;
@@ -76,12 +76,6 @@ body {
   .smooth-dnd-container {
     min-height: 10px;
   }
-}
-
-.notifications {
-  position: fixed;
-  top: 10px ;
-  right: 10px ;
 }
 
 .ant-card-head {

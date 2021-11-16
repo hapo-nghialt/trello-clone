@@ -1,18 +1,25 @@
 import { register } from 'actions/Api'
 import 'antd/dist/antd.css'
 import { Button, Card, Form, Input } from 'antd'
-import React, { useState } from 'react'
-import { Toast } from 'react-bootstrap'
+import React, { useContext } from 'react'
+import { Spinner, Toast } from 'react-bootstrap'
 import './Register.scss'
+import { AuthContext } from 'contexts/AuthContext'
 
 function Register() {
-  const [showToast, setShowToast] = useState(false)
+  const {
+    showToast: { show, message, type },
+    setShowToast
+  } = useContext(AuthContext)
 
   const onFinish = async (values) => {
     const registerData = await register(values)
     if (registerData.errors) {
-      console.log(registerData.errors[0].msg)
-      setShowToast(!showToast)
+      setShowToast({
+        show: true,
+        message: registerData.errors[0].msg,
+        type: 'danger'
+      })
     }
   }
 
@@ -28,50 +35,48 @@ function Register() {
           >
             <Form.Item
               name='username'
-              // rules={[
-              //   {
-              //     required: true,
-              //     message: 'Please input your username!'
-              //   },
-              //   {
-              //     min: 3,
-              //     max: 20,
-              //     message: 'Username between 3 and 20 characters!'
-              //   }
-              // ]}
             >
               <Input placeholder='Enter your username'/>
             </Form.Item>
             <Form.Item
               name='password'
-              // rules={[
-              //   {
-              //     required: true,
-              //     message: 'Please input your password!'
-              //   }
-              // ]}
             >
               <Input.Password
                 placeholder='Enter your password'
               />
             </Form.Item>
             <Button type='primary' htmlType='submit'>
+              <Spinner
+                as="span"
+                animation="border"
+                size="sm"
+                role="status"
+                aria-hidden="true"
+              />
               Submit
             </Button>
           </Form>
         </Card>
       </div>
-      <Toast show={showToast} className='notifications'>
+      <Toast
+        show={show}
+        className={`bg-${type} text-white`}
+        style={{
+          position: 'fixed',
+          top: '10px',
+          right: '10px'
+        }}
+        onClose={setShowToast.bind(this, {
+          show: false,
+          message: message
+        })}
+        autohide
+        delay={2000}
+      >
         <Toast.Header>
-          <img
-            src='holder.js/20x20?text=%20'
-            className='rounded me-2'
-            alt=''
-          />
-          <strong className='me-auto'>Bootstrap</strong>
-          <small>11 mins ago</small>
+          <strong className='mr-auto'>Trello</strong>
         </Toast.Header>
-        <Toast.Body>Woohoo, you are reading this text in a Toast!</Toast.Body>
+        <Toast.Body>{message}</Toast.Body>
       </Toast>
     </>
   )

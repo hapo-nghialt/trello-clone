@@ -9,14 +9,14 @@ import Landing from 'components/Landing/Landing'
 
 function App() {
   return (
-    //<AuthContextProvider>
-    <BrowserRouter>
-      <Routes>
-        <Route exact path='/' element={<Landing />} />
-        <Route exact path='/register' element={<Register />} />
-      </Routes>
-    </BrowserRouter>
-    //</AuthContextProvider>
+    <AuthContextProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route exact path='/' element={<Landing />} />
+          <Route exact path='/register' element={<Register />} />
+        </Routes>
+      </BrowserRouter>
+    </AuthContextProvider>
   )
 }
 
