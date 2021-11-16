@@ -8,12 +8,12 @@ const login = (data) => {
 const register = async (data) => {
   const { username, password } = data
   try {
-    const newUser = await new UserModel({
-      username: username,
-      password: passwordHash.generate(password)
-    })
-    newUser.save()
-    return newUser
+    // const newUser = await new UserModel({
+    //   username: username,
+    //   password: passwordHash.generate(password)
+    // })
+    // newUser.save()
+    // return newUser
   } catch (error) {
     throw new Error(error)
   }
