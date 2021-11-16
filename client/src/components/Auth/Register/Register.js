@@ -82,7 +82,8 @@ function Register() {
         style={{
           position: 'fixed',
           top: '10px',
-          right: '10px'
+          right: '10px',
+          width: '250px'
         }}
         onClose={setShowToast.bind(this, {
           show: false,
