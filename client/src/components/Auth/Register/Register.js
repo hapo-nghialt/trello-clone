@@ -33,7 +33,7 @@ function Register() {
       <div className='register-page'>
         <Card
           className='register-card'
-          title='Đăng nhập vào Trello'
+          title='Đăng nhập'
         >
           <Form
             onFinish={onFinish}
