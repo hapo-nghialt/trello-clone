@@ -62,7 +62,7 @@ function Register() {
               disabled={buttonDisabled}
             >
               <span>Submit</span>
-              <Spinner
+              {/* <Spinner
                 as="span"
                 animation="border"
                 size="sm"
@@ -71,7 +71,7 @@ function Register() {
                 style={{
                   marginLeft: '5px'
                 }}
-              />
+              /> */}
             </Button>
           </Form>
         </Card>

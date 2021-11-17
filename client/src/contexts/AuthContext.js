@@ -8,7 +8,11 @@ export const AuthContext = createContext()
 
 const AuthContextProvider = ({ children }) => {
   // State
-  // const [ authState, dispatch ] = useReducer(authReducer, initialState, init)
+  const [authState, dispatch] = useReducer(authReducer, {
+    authLoading: true,
+    isAuthenticated: false,
+    user: null
+  })
 
   const [ showToast, setShowToast ] = useState({
     show: false,
@@ -19,14 +23,30 @@ const AuthContextProvider = ({ children }) => {
   // Authenticated user
   const authenticatedUser = async () => {
     if (localStorage[LOCAL_STORAGE_TOKEN_NAME]) {
-      setAuthToken(localStorage[LOCAL_STORAGE_TOKEN_NAME]);
+      setAuthToken(localStorage[LOCAL_STORAGE_TOKEN_NAME])
     }
 
     try {
       const response = await axios.get(`${API_ROOT}/auth`)
-      console.log(response)
+      if (response.data.success) {
+        dispatch({
+          type: 'SET_AUTH',
+          payload: {
+            isAuthenticated: true,
+            user: response.data.user
+          }
+        })
+      }
     } catch (error) {
-      console.log(error)
+      localStorage.removeItem(LOCAL_STORAGE_TOKEN_NAME)
+      setAuthToken(null)
+      dispatch({
+        type: 'SET_AUTH',
+        payload: {
+          isAuthenticated: false,
+          user: null
+        }
+      })
     }
   }
 
@@ -52,7 +72,8 @@ const AuthContextProvider = ({ children }) => {
   const authContextData = {
     registerUser,
     showToast,
-    setShowToast
+    setShowToast,
+    authState
   }
 
   return (

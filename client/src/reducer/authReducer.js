@@ -1,12 +1,20 @@
-export const authReducer = () => {
-  // const {
+export const authReducer = (state, action) => {
+  const {
+    type,
+    payload: { isAuthenticated, user }
+  } = action
 
-  // }
+  switch (type) {
 
-  // switch (type) {
-  //   case 'SET_AUTH':
-      
-  
-  //   default:
-  // }
+  case 'SET_AUTH':
+    return {
+      ...state,
+      authLoading: false,
+      isAuthenticated,
+      user
+    }
+
+  default:
+    return state
+  }
 }
