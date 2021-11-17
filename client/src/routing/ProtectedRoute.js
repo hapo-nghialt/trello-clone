@@ -11,7 +11,7 @@ const ProtectedRoute = ({ component: Component, ...rest }) => {
   if (authLoading)
     return (
       <div>
-        <Spinner animation="border" variant="info" style={{
+        <Spinner animation='border' variant='info' style={{
           position: 'fixed',
           top: '45%',
           left: '50%'

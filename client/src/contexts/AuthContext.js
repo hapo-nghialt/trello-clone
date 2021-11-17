@@ -1,5 +1,5 @@
 import axios from 'axios'
-import React, { createContext, useReducer, useState } from 'react'
+import React, { createContext, useEffect, useReducer, useState } from 'react'
 import { authReducer } from 'reducer/authReducer'
 import { API_ROOT, LOCAL_STORAGE_TOKEN_NAME } from 'utilities/constants'
 import setAuthToken from 'utilities/setAuthToken'
@@ -49,6 +49,12 @@ const AuthContextProvider = ({ children }) => {
       })
     }
   }
+
+  useEffect(() => {
+    setTimeout(() => {
+      authenticatedUser()
+    }, 1000)
+  }, [])
 
   // Register user
   const registerUser = async (data) => {

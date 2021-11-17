@@ -5,7 +5,6 @@ export const authReducer = (state, action) => {
   } = action
 
   switch (type) {
-
   case 'SET_AUTH':
     return {
       ...state,
