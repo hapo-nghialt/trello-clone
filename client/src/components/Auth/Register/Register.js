@@ -30,7 +30,7 @@ function Register() {
 
   return (
     <>
-      <div className='register-page'>
+      <div className='auth-page'>
         <Card
           className='register-card'
           title='Đăng nhập'
