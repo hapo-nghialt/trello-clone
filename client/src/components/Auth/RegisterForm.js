@@ -4,9 +4,29 @@ import React, { useContext, useState } from 'react'
 import { Toast } from 'react-bootstrap'
 import { AuthContext } from 'contexts/AuthContext'
 import { Link } from 'react-router-dom'
-import ImgCrop from 'antd-img-crop'
+import { LoadingOutlined, PlusOutlined } from '@ant-design/icons'
 
 function RegisterForm() {
+
+
+
+
+  const [loading, setLoading] = useState(false)
+
+  const imageUrl = 'https://i.guim.co.uk/img/media/26392d05302e02f7bf4eb143bb84c8097d09144b/446_167_3683_2210/master/3683.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=49ed3252c0b2ffb49cf8b508892e452d'
+
+  const uploadButton = (
+    <div>
+      {loading ? <LoadingOutlined /> : <PlusOutlined />}
+      <div style={{ marginTop: 8 }}>Upload</div>
+    </div>
+  )
+
+
+
+
+
+
   // Context
   const {
     register,
@@ -66,17 +86,17 @@ function RegisterForm() {
               }}
             />
           </Form.Item>
-          {/* <ImgCrop rotate>
-            <Upload
-              action=""
-              listType="picture-card"
-              fileList={fileList}
-              onChange={onChange}
-              onPreview={onPreview}
-            >
-              {fileList.length < 5 && '+ Upload'}
-            </Upload>
-          </ImgCrop> */}
+          <Upload
+            name="avatar"
+            listType="picture-card"
+            className="avatar-uploader"
+            showUploadList={false}
+            action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+            beforeUpload={beforeUpload}
+            onChange={this.handleChange}
+          >
+            {imageUrl ? <img src={imageUrl} alt="avatar" style={{ width: '100%' }} /> : uploadButton}
+          </Upload>
           <Button
             type='primary'
             htmlType='submit'
