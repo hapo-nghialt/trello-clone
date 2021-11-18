@@ -3,18 +3,22 @@ import { Card, Form, Input, Button, Divider } from 'antd'
 import 'antd/dist/antd.css'
 import { Link } from 'react-router-dom'
 import { AuthContext } from 'contexts/AuthContext'
+import { Toast } from 'react-bootstrap'
 
 function LoginForm() {
   const {
-    login
+    login,
+    showToast: { show, message, type },
+    setShowToast
   } = useContext(AuthContext)
 
   const onFinish = async (values) => {
-    try {
-      const loginData = await login(values)
-    } catch (error) {
-      console.log(error)
-    }
+    const loginData = await login(values)
+    setShowToast({
+      show: true,
+      message: loginData.message,
+      type: loginData.success ? 'success' : 'danger'
+    })
   }
 
   return (
@@ -74,7 +78,7 @@ function LoginForm() {
           <Link to='/register' style={{ display: 'block' }}>Sign up for an account </Link>
         </Form>
       </Card>
-      {/* <Toast
+      <Toast
         show={show}
         className={`bg-${type} text-white`}
         style={{
@@ -94,7 +98,7 @@ function LoginForm() {
           <strong className='mr-auto'>Trello</strong>
         </Toast.Header>
         <Toast.Body>{message}</Toast.Body>
-      </Toast> */}
+      </Toast>
     </>
   )
 }

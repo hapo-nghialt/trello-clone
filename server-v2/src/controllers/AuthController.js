@@ -12,14 +12,14 @@ const login = async (req, res) => {
     const user = await UserModel.findOne({ username })
 
     if (!user) return res.status(400).json({
-      status: false,
+      success: false,
       message: 'Incorrect username/password'
     })
 
     // Check password
     const passwordValid = await passwordHash.verify(password, user.password)
     if (!passwordValid) return res.status(400).json({
-      status: false,
+      success: false,
       message: 'Incorrect username/password'
     })
 

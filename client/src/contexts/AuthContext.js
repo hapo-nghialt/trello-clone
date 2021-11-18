@@ -53,16 +53,27 @@ const AuthContextProvider = ({ children }) => {
   useEffect(() => {
     setTimeout(() => {
       authenticatedUser()
-    }, 500)
+    }, 1000)
   }, [])
 
   // Login
   const login = async (request) => {
     try {
       const response = await axios.post(`${API_ROOT}/auth/login`, request)
-      console.log(response)
+      if (response.data.success) {
+        localStorage.setItem(
+          LOCAL_STORAGE_TOKEN_NAME,
+          response.data.accessToken
+        )
+      }
+
+      setTimeout(() => {
+        authenticatedUser()
+      }, 500)
+
+      return response.data
     } catch (error) {
-      console.log(error)
+      if (error.response.data) return error.response.data
     }
   }
 
@@ -77,8 +88,11 @@ const AuthContextProvider = ({ children }) => {
         )
       }
 
-      await authenticatedUser()
+      setTimeout(() => {
+        authenticatedUser()
+      }, 1000)
 
+      // await authenticatedUser()
       return response.data
     } catch (error) {
       if (error.response.data) return error.response.data
