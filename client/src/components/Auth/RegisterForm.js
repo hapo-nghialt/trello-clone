@@ -1,9 +1,10 @@
 import 'antd/dist/antd.css'
-import { Button, Card, Divider, Form, Input } from 'antd'
+import { Button, Card, Divider, Form, Input, Upload } from 'antd'
 import React, { useContext, useState } from 'react'
 import { Toast } from 'react-bootstrap'
 import { AuthContext } from 'contexts/AuthContext'
 import { Link } from 'react-router-dom'
+import ImgCrop from 'antd-img-crop'
 
 function RegisterForm() {
   // Context
@@ -40,8 +41,10 @@ function RegisterForm() {
           <Form.Item
             name='username'
             rules={[
-              { required: true, message: 'Username is required' }
+              { required: true, message: 'Username is required' },
+              { min: 8, max: 20, message: 'Username between 8 and 20 characters' }
             ]}
+            hasFeedback
           >
             <Input
               placeholder='Enter your username'
@@ -63,6 +66,17 @@ function RegisterForm() {
               }}
             />
           </Form.Item>
+          {/* <ImgCrop rotate>
+            <Upload
+              action=""
+              listType="picture-card"
+              fileList={fileList}
+              onChange={onChange}
+              onPreview={onPreview}
+            >
+              {fileList.length < 5 && '+ Upload'}
+            </Upload>
+          </ImgCrop> */}
           <Button
             type='primary'
             htmlType='submit'
@@ -70,16 +84,6 @@ function RegisterForm() {
             className='auth-button'
           >
             <span>Continue</span>
-            {/* <Spinner
-              as="span"
-              animation="border"
-              size="sm"
-              role="status"
-              aria-hidden="true"
-              style={{
-                marginLeft: '5px'
-              }}
-            /> */}
           </Button>
           <Divider />
           <Link to='/login' style={{ display: 'block' }}>Already have an account? Log In</Link>
