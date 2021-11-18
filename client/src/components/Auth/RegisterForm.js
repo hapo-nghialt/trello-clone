@@ -64,9 +64,6 @@ function RegisterForm() {
   const handleCancel = () => setPreviewVisible(false)
 
 
-
-
-
   return (
     <>
       <Card
@@ -106,12 +103,6 @@ function RegisterForm() {
           </Form.Item>
           <Upload
             listType='picture-card'
-            action={{
-              name : 'xxx.png',
-              status : 'done',
-              url : 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-              thumbUrl : 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png'
-            }}
             onPreview={handlePreview}
             beforeUpload={() => false}
           >
