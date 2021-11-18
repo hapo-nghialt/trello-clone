@@ -3,8 +3,18 @@
   display: flex;
   justify-content: center;
 
-  .register-card {
+  .auth-card {
     margin: auto;
     width: 400px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0 0 10px;
+
+    .auth-button {
+      width: 100%;
+      background-color: #5AAC44;
+      border-color: #5AAC44;
+      font-weight: bold;
+      height: 40px;
+      border-radius: 5px;
+    }
   }
 }

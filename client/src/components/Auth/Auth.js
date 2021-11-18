@@ -11,7 +11,6 @@ const Auth = ({ authRoute }) => {
     authState: { authLoading, isAuthenticated }
   } = useContext(AuthContext)
 
-  console.log(isAuthenticated);
   let body
 
   if (authLoading) {

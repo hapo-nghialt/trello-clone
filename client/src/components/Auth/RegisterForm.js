@@ -1,25 +1,26 @@
 import 'antd/dist/antd.css'
-import { Button, Card, Form, Input } from 'antd'
+import { Button, Card, Divider, Form, Input } from 'antd'
 import React, { useContext, useState } from 'react'
 import { Toast } from 'react-bootstrap'
 import { AuthContext } from 'contexts/AuthContext'
+import { Link } from 'react-router-dom'
 
 function RegisterForm() {
   // Context
   const {
-    registerUser,
+    register,
     showToast: { show, message, type },
     setShowToast
   } = useContext(AuthContext)
 
   const [buttonDisabled, setButtonDisabled] = useState(false)
 
-  const onFinish = async (values) => {
+  const onFinish = async (data) => {
     setButtonDisabled(true)
     setTimeout(() => {
       setButtonDisabled(false)
     }, 2000)
-    const registerData = await registerUser(values)
+    const registerData = await register(data)
     setShowToast({
       show: true,
       message: registerData.message,
@@ -30,7 +31,7 @@ function RegisterForm() {
   return (
     <>
       <Card
-        className='register-card'
+        className='auth-card'
         title='Register'
       >
         <Form
@@ -42,7 +43,10 @@ function RegisterForm() {
               { required: true, message: 'Username is required' }
             ]}
           >
-            <Input placeholder='Enter your username'/>
+            <Input
+              placeholder='Enter your username'
+              style={{ height: '44px' }}
+            />
           </Form.Item>
           <Form.Item
             name='password'
@@ -52,14 +56,20 @@ function RegisterForm() {
           >
             <Input.Password
               placeholder='Enter your password'
+              style={{
+                paddingTop: '0',
+                paddingBottom: '0',
+                height: '42px'
+              }}
             />
           </Form.Item>
           <Button
             type='primary'
             htmlType='submit'
             disabled={buttonDisabled}
+            className='auth-button'
           >
-            <span>Submit</span>
+            <span>Continue</span>
             {/* <Spinner
               as="span"
               animation="border"
@@ -71,6 +81,8 @@ function RegisterForm() {
               }}
             /> */}
           </Button>
+          <Divider />
+          <Link to='/login' style={{ display: 'block' }}>Already have an account? Log In</Link>
         </Form>
       </Card>
       <Toast

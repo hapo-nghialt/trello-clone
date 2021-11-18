@@ -53,13 +53,23 @@ const AuthContextProvider = ({ children }) => {
   useEffect(() => {
     setTimeout(() => {
       authenticatedUser()
-    }, 1000)
+    }, 500)
   }, [])
 
-  // Register user
-  const registerUser = async (data) => {
+  // Login
+  const login = async (request) => {
     try {
-      const response = await axios.post(`${API_ROOT}/auth/register`, data)
+      const response = await axios.post(`${API_ROOT}/auth/login`, request)
+      console.log(response)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  // Register user
+  const register = async (request) => {
+    try {
+      const response = await axios.post(`${API_ROOT}/auth/register`, request)
       if (response.data.success) {
         localStorage.setItem(
           LOCAL_STORAGE_TOKEN_NAME,
@@ -76,7 +86,8 @@ const AuthContextProvider = ({ children }) => {
   }
 
   const authContextData = {
-    registerUser,
+    register,
+    login,
     showToast,
     setShowToast,
     authState

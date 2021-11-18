@@ -28,16 +28,16 @@ export const createNewCard = async (data) => {
   return response.data
 }
 
-export const login = async (data) => {
-  const response = await axios.post(`${API_ROOT}/auth/login`, data)
-  return response.data
-}
+// export const login = async (data) => {
+//   const response = await axios.post(`${API_ROOT}/auth/login`, data)
+//   return response.data
+// }
 
-export const register = async (data) => {
-  try {
-    const response = await axios.post(`${API_ROOT}/auth/register`, data)
-    return response.data
-  } catch (error) {
-    if (error.response.data) return error.response.data
-  }
-}
+// export const register = async (data) => {
+//   try {
+//     const response = await axios.post(`${API_ROOT}/auth/register`, data)
+//     return response.data
+//   } catch (error) {
+//     if (error.response.data) return error.response.data
+//   }
+// }

@@ -1,12 +1,49 @@
 import { validationResult } from "express-validator"
 import { UserModel } from "../models/User"
-import { AuthService } from "../services/AuthService"
+
+const passwordHash = require('password-hash')
 const jwt = require('jsonwebtoken')
 
 const login = async (req, res) => {
-  const loginData = await AuthService.login(req.body)
+  const { username, password } = req.body
+
+  try {
+    // Check for existing user
+    const user = await UserModel.findOne({ username })
+
+    if (!user) return res.status(400).json({
+      status: false,
+      message: 'Incorrect username/password'
+    })
+
+    // Check password
+    const passwordValid = await passwordHash.verify(password, user.password)
+    if (!passwordValid) return res.status(400).json({
+      status: false,
+      message: 'Incorrect username/password'
+    })
+
+    const accessToken = jwt.sign(
+      {
+        userId: user._id,
+      },
+      process.env.ACCESS_TOKEN_SECRET
+    )
+
+    return res.status(200).json({
+      success: true,
+      message: 'Logged in successfully',
+      accessToken
+    })
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      errors: error.message
+    })
+  }
 }
 
+// Register user
 const register = async (req, res) => {
   const errors = validationResult(req)
   if (!errors.isEmpty()) {
@@ -15,28 +52,38 @@ const register = async (req, res) => {
       message: errors.array()[0].msg
     })
   }
+
+  const { username, password } = req.body
+
   try {
-    const registerData = await AuthService.register(req.body)
+    const registerData = new UserModel({
+      username: username,
+      password: passwordHash.generate(password)
+    })
+
+    await registerData.save()
+
     const accessToken = jwt.sign(
       {
-        // userId: registerData._id
-        userId: '618cba55c08d59521e679c36'
+        userId: registerData._id
       },
       process.env.ACCESS_TOKEN_SECRET
     )
+
     return res.status(200).json({
       success: true,
       message: 'User created successfully',
-      registerData,
       accessToken
     })
   } catch (error) {
     return res.status(500).json({
+      success: false,
       errors: error.message
     })
   }
 }
 
+// Verify user
 const verifyUser = async (req, res) => {
   try {
     const user = await UserModel.findById(req.userId).select('-password')

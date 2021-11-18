@@ -1,13 +1,17 @@
-import React from 'react'
-import { login } from 'actions/Api'
-import { Card, Form, Input, Button } from 'antd'
+import React, { useContext } from 'react'
+import { Card, Form, Input, Button, Divider } from 'antd'
 import 'antd/dist/antd.css'
+import { Link } from 'react-router-dom'
+import { AuthContext } from 'contexts/AuthContext'
 
 function LoginForm() {
+  const {
+    login
+  } = useContext(AuthContext)
+
   const onFinish = async (values) => {
     try {
       const loginData = await login(values)
-      console.log(loginData)
     } catch (error) {
       console.log(error)
     }
@@ -16,8 +20,8 @@ function LoginForm() {
   return (
     <>
       <Card
-        className='register-card'
-        title='Login'
+        className='auth-card'
+        title='Log in'
       >
         <Form
           onFinish={onFinish}
@@ -28,7 +32,10 @@ function LoginForm() {
               { required: true, message: 'Username is required' }
             ]}
           >
-            <Input placeholder='Enter your username'/>
+            <Input
+              placeholder='Enter your username'
+              style={{ height: '44px' }}
+            />
           </Form.Item>
           <Form.Item
             name='password'
@@ -38,14 +45,20 @@ function LoginForm() {
           >
             <Input.Password
               placeholder='Enter your password'
+              style={{
+                paddingTop: '0',
+                paddingBottom: '0',
+                height: '42px'
+              }}
             />
           </Form.Item>
           <Button
             type='primary'
             htmlType='submit'
+            className='auth-button'
             // disabled={buttonDisabled}
           >
-            <span>Submit</span>
+            <span>Log in</span>
             {/* <Spinner
               as="span"
               animation="border"
@@ -57,6 +70,8 @@ function LoginForm() {
               }}
             /> */}
           </Button>
+          <Divider />
+          <Link to='/register' style={{ display: 'block' }}>Sign up for an account </Link>
         </Form>
       </Card>
       {/* <Toast
