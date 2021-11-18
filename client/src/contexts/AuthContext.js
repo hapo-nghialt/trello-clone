@@ -52,7 +52,21 @@ const AuthContextProvider = ({ children }) => {
 
   useEffect(() => {
     setTimeout(() => {
-      authenticatedUser()
+      if (localStorage[LOCAL_STORAGE_TOKEN_NAME]) {
+        dispatch({
+          type: 'SET_AUTH',
+          payload: {
+            isAuthenticated: true
+          }
+        })
+      } else {
+        dispatch({
+          type: 'SET_AUTH',
+          payload: {
+            isAuthenticated: false
+          }
+        })
+      }
     }, 1000)
   }, [])
 
