@@ -4,10 +4,9 @@ import React, { useContext, useState } from 'react'
 import { Toast } from 'react-bootstrap'
 import { AuthContext } from 'contexts/AuthContext'
 import { Link } from 'react-router-dom'
-import { LoadingOutlined } from '@ant-design/icons'
+import { LoadingOutlined, LockOutlined, MailOutlined, UserOutlined } from '@ant-design/icons'
 
 function RegisterForm() {
-
 
   // Context
   const {
@@ -23,46 +22,14 @@ function RegisterForm() {
     setTimeout(() => {
       setButtonDisabled(false)
     }, 2000)
-    const registerData = await register(data)
-    setShowToast({
-      show: true,
-      message: registerData.message,
-      type: registerData.success ? 'success' : 'danger'
-    })
+    console.log(data);
+    // const registerData = await register(data)
+    // setShowToast({
+    //   show: true,
+    //   message: registerData.message,
+    //   type: registerData.success ? 'success' : 'danger'
+    // })
   }
-
-
-  const [fileList, setFileList] = useState([])
-  const [previewVisible, setPreviewVisible] = useState(false)
-  const [previewImage, setPreviewImage] = useState('')
-
-  const getBase64 = (file) => {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result);
-      reader.onerror = error => reject(error);
-    });
-  }
-
-  const handlePreview = async (file) => {
-    if (!file.url && !file.preview) {
-      file.preview = await getBase64(file.originFileObj);
-    }
-
-    setPreviewImage(file.preview)
-    setPreviewVisible(true)
-  };
-
-  const uploadButton = (
-    <div>
-      <LoadingOutlined />
-      <div style={{ marginTop: 8 }}>Upload</div>
-    </div>
-  );
-
-  const handleCancel = () => setPreviewVisible(false)
-
 
   return (
     <>
@@ -76,7 +43,7 @@ function RegisterForm() {
           <Form.Item
             name='username'
             rules={[
-              { required: true, message: 'Username is required' },
+              { required: true },
               { min: 8, max: 20, message: 'Username between 8 and 20 characters' }
             ]}
             hasFeedback
@@ -84,10 +51,26 @@ function RegisterForm() {
             <Input
               placeholder='Enter your username'
               style={{ height: '44px' }}
+              prefix={<UserOutlined />}
+            />
+          </Form.Item>
+          <Form.Item
+            name='email'
+            rules={[
+              { required: true, message: 'Email is required' },
+              { type: 'email', message: 'This is not a valid email' }
+            ]}
+            hasFeedback
+          >
+            <Input
+              placeholder='Enter your email'
+              style={{ height: '44px' }}
+              prefix={<MailOutlined />}
             />
           </Form.Item>
           <Form.Item
             name='password'
+            hasFeedback
             rules={[
               { required: true, message: 'Password is required' }
             ]}
@@ -99,23 +82,39 @@ function RegisterForm() {
                 paddingBottom: '0',
                 height: '42px'
               }}
+              prefix={<LockOutlined />}
             />
           </Form.Item>
-          <Upload
-            listType='picture-card'
-            onPreview={handlePreview}
-            beforeUpload={() => false}
-          >
-            {uploadButton}
-          </Upload>
+          <Form.Item
+            name="confirm"
+            dependencies={['password']}
+            hasFeedback
+            rules={[
+              {
+                required: true,
+                message: 'Please confirm your password!'
+              },
+              ({ getFieldValue }) => ({
+                validator(_, value) {
+                  if (!value || getFieldValue('password') === value) {
+                    return Promise.resolve()
+                  }
 
-          <Modal
-            visible={previewVisible}
-            footer={null}
-            onCancel={handleCancel}
+                  return Promise.reject(new Error('The two passwords that you entered do not match!'))
+                }
+              })
+            ]}
           >
-            <img alt='example' style={{ width: '100%' }} src={previewImage} />
-          </Modal>
+            <Input.Password
+              placeholder='Enter your password'
+              style={{
+                paddingTop: '0',
+                paddingBottom: '0',
+                height: '42px'
+              }}
+              prefix={<LockOutlined />}
+            />
+          </Form.Item>
           <Button
             type='primary'
             htmlType='submit'
