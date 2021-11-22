@@ -22,13 +22,12 @@ function RegisterForm() {
     setTimeout(() => {
       setButtonDisabled(false)
     }, 2000)
-    console.log(data);
-    // const registerData = await register(data)
-    // setShowToast({
-    //   show: true,
-    //   message: registerData.message,
-    //   type: registerData.success ? 'success' : 'danger'
-    // })
+    const registerData = await register(data)
+    setShowToast({
+      show: true,
+      message: registerData.message,
+      type: registerData.success ? 'success' : 'danger'
+    })
   }
 
   return (

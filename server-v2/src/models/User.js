@@ -8,6 +8,10 @@ let User = new Schema({
     min: 3,
     max: 20
   },
+  email: {
+    type: String,
+    required: true
+  },
   password: {
     type: String,
     required: true

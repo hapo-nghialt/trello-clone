@@ -53,11 +53,12 @@ const register = async (req, res) => {
     })
   }
 
-  const { username, password } = req.body
+  const { username, email, password } = req.body
 
   try {
     const registerData = new UserModel({
       username: username,
+      email: email,
       password: passwordHash.generate(password)
     })
 
