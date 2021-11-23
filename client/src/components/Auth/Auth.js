@@ -8,7 +8,7 @@ import { Spinner } from 'react-bootstrap'
 
 const Auth = ({ authRoute }) => {
   const {
-    authState: { authLoading, isAuthenticated }
+    authState: { authLoading, isAuthenticated, user }
   } = useContext(AuthContext)
 
   let body
@@ -23,7 +23,7 @@ const Auth = ({ authRoute }) => {
         }}/>
       </div>
     )
-  } else if (isAuthenticated) return <Redirect to='/board' />
+  } else if (isAuthenticated && user) return <Redirect to={`${user.username}/boards`} />
   else
     body = (
       <>

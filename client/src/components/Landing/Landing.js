@@ -1,10 +1,18 @@
 import { Button } from 'antd'
-import React from 'react'
+import { AuthContext } from 'contexts/AuthContext'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import landing_1 from '../../assets/img/landing/landing_1.png'
+import { Redirect } from 'react-router'
 import './Landing.scss'
 
 function Landing() {
+  const {
+    authState: { isAuthenticated, user }
+  } = useContext(AuthContext)
+
+  if (isAuthenticated && user) return <Redirect to={`${user.username}/boards`}/>
+
   return (
     <div className='landing'>
       <div className='landing-top-image'>

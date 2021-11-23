@@ -25,6 +25,10 @@ let Board = new Schema({
   _destroy: {
     type: Boolean,
     default: false
+  },
+  user: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
   }
 }, {
   versionKey: false
