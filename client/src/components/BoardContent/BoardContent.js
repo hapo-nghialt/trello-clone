@@ -1,4 +1,4 @@
-import Column from 'components/BoardDetail/Column/Column'
+import Column from '../Column/Column'
 import React, { useEffect, useRef, useState } from 'react'
 import { isEmpty } from 'lodash'
 import './BoardContent.scss'

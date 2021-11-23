@@ -51,23 +51,16 @@ const AuthContextProvider = ({ children }) => {
   }
 
   useEffect(() => {
-    setTimeout(() => {
-      if (localStorage[LOCAL_STORAGE_TOKEN_NAME]) {
-        dispatch({
-          type: 'SET_AUTH',
-          payload: {
-            isAuthenticated: true
-          }
-        })
-      } else {
-        dispatch({
-          type: 'SET_AUTH',
-          payload: {
-            isAuthenticated: false
-          }
-        })
-      }
-    }, 1000)
+    if (localStorage[LOCAL_STORAGE_TOKEN_NAME]) {
+      authenticatedUser()
+    } else {
+      dispatch({
+        type: 'SET_AUTH',
+        payload: {
+          isAuthenticated: false
+        }
+      })
+    }
   }, [])
 
   // Login
@@ -113,9 +106,28 @@ const AuthContextProvider = ({ children }) => {
     }
   }
 
+  // Log out
+  const logout = () => {
+    dispatch({
+      type: 'SET_LOADING',
+      payload: true
+    })
+    localStorage.removeItem(LOCAL_STORAGE_TOKEN_NAME)
+    setTimeout(() => {
+      dispatch({
+        type: 'SET_AUTH',
+        payload: {
+          isAuthenticated: false,
+          user: null
+        }
+      })
+    }, 1000)
+  }
+
   const authContextData = {
     register,
     login,
+    logout,
     showToast,
     setShowToast,
     authState
