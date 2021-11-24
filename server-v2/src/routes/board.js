@@ -5,8 +5,8 @@ const router = Router()
 
 router.post(
   '/store',
-  BoardValidation.store(),
-  BoardController.store
+  BoardValidation.create(),
+  BoardController.create
 )
 
 router.get(

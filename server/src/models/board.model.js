@@ -1,5 +1,5 @@
 import Joi from 'joi'
-import { ObjectID } from 'mongodb'
+import { ObjectId } from 'mongodb'
 import { getDB } from '../config/mongodb'
 import { ColumnModel } from './column.model'
 import { CardModel } from './card.model'
@@ -35,7 +35,7 @@ const createNew = async (data) => {
 const pushColumnOrder = async (boardId, columnId) => {
   try {
     const result = await getDB().collection(boardCollectionName).findOneAndUpdate(
-      { _id: ObjectID(boardId) },
+      { _id: ObjectId(boardId) },
       { $push: { columnOrder: columnId } },
       { returnOriginal: false }
     )
@@ -51,7 +51,7 @@ const getFullBoard = async (boardId) => {
     const result = await getDB().collection(boardCollectionName).aggregate([
       { $match:
         {
-          _id: ObjectID(boardId),
+          _id: ObjectId(boardId),
           _destroy: false
         }
       },

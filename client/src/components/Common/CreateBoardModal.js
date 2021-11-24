@@ -1,30 +1,28 @@
 import { Button, Form, Input, Modal } from 'antd'
-import React, { useState } from 'react'
+import { AuthContext } from 'contexts/AuthContext'
+import { BoardContext } from 'contexts/BoardContext'
+import React, { useContext, useState } from 'react'
+import { initialColors, initialImages } from 'utilities/constants'
 import './Common.scss'
 
 function CreateBoardModal(props) {
+  const images = initialImages
+  const colors = initialColors
+
+  const {
+    createNewBoard
+  } = useContext(BoardContext)
+
+  const {
+    authState: user
+  } = useContext(AuthContext)
+
+  const [backgroundImageInput, setBackgroundImageInput] = useState(images[0])
   const [backgroundColorInput, setBackgroundColorInput] = useState('')
-  const [backgroundImageInput, setBackgroundImageInput] = useState(
-    'https://images.unsplash.com/photo-1637684990963-366531ce088a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80'
-  )
   const { visible, handleOk, handleCancel } = props
 
-  const images = [
-    'https://images.unsplash.com/photo-1637684990963-366531ce088a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
-    'https://images.unsplash.com/photo-1637423086319-892cc1c3526b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
-    'https://images.unsplash.com/photo-1637345540120-38bb0bbb7871?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1595&q=80',
-    'https://images.unsplash.com/photo-1637479758719-a8f1241435e8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1111&q=80'
-  ]
-
-  const colors = [
-    'rgb(0, 121, 191)',
-    'rgb(210, 144, 52)',
-    'rgb(81, 152, 57)',
-    'rgb(176, 70, 50)',
-    'rgb(137, 96, 158)'
-  ]
-
   const [toggleButton, setToggleButton] = useState(true)
+  const [newBoardTitle, setNewBoardTitle] = useState('')
 
   const handleSetBackgroundInput = (data, type) => {
     if (type == 'color') {
@@ -39,10 +37,23 @@ function CreateBoardModal(props) {
   const handleTitleChange = (e) => {
     if (e.target.value) {
       setToggleButton(false)
+      setNewBoardTitle(e.target.value)
     }
     else {
       setToggleButton(true)
+      setNewBoardTitle('')
     }
+  }
+
+  const addNewBoard = async () => {
+    if (newBoardTitle) {
+      const newBoard = {
+        title: newBoardTitle.trim(),
+        userId: user.user._id
+      }
+      await createNewBoard(newBoard)
+    }
+    return
   }
 
   return (
@@ -72,12 +83,15 @@ function CreateBoardModal(props) {
             backgroundPosition: 'center center'
           }}
         >
-          <Form.Item>
+          <Form.Item
+            name='title'
+          >
             <Input
               className='input-create-board'
               placeholder='Add board title'
               autoFocus={true}
               onChange={handleTitleChange}
+              onKeyDown={event => (event.key === 'Enter') && addNewBoard()}
             />
           </Form.Item>
         </div>
@@ -103,7 +117,12 @@ function CreateBoardModal(props) {
         </ul>
       </div>
       <div>
-        <Button type='primary' style={{ marginTop: '8px' }} disabled={toggleButton}>
+        <Button
+          type='primary'
+          style={{ marginTop: '8px' }}
+          disabled={toggleButton}
+          onClick={addNewBoard}
+        >
           Create board
         </Button>
       </div>

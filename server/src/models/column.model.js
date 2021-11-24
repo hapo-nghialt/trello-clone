@@ -1,5 +1,5 @@
 import Joi from 'joi'
-import { ObjectID } from 'mongodb'
+import { ObjectId } from 'mongodb'
 import { getDB } from '../config/mongodb'
 
 const columnCollectionName = 'columns'
@@ -35,7 +35,7 @@ const createNew = async (data) => {
 const pushCardOrder = async (columnId, cardId) => {
   try {
     const result = await getDB().collection(columnCollectionName).findOneAndUpdate(
-      { _id: ObjectID(columnId) },
+      { _id: ObjectId(columnId) },
       { $push: { cardOrder: cardId } },
       { returnOriginal: false }
     )
@@ -49,7 +49,7 @@ const pushCardOrder = async (columnId, cardId) => {
 const update = async (id, data) => {
   try {
     const result = await getDB().collection(columnCollectionName).findOneAndUpdate(
-      { _id: ObjectID(id) },
+      { _id: ObjectId(id) },
       { $set: data },
       { returnOriginal: false }
     )

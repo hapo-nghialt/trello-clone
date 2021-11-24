@@ -1,6 +1,6 @@
 import { ColumnModel } from "../models/Column"
 import { BoardService } from "./BoardService"
-import { ObjectID } from "mongodb";
+import { ObjectId } from "mongodb";
 import { CardService } from "./CardService";
 
 const store = async (data)  => {
@@ -31,7 +31,7 @@ const update = async (id, data) => {
   try {
     const updatedData = {
       ...data,
-      cardOrder: data.cardOrder.map($i => ObjectID($i._id)),
+      cardOrder: data.cardOrder.map($i => ObjectId($i._id)),
       updatedAt: Date.now()
     }
     delete updatedData.boardId, updatedData.columnId

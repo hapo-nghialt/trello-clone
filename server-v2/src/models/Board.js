@@ -26,7 +26,7 @@ let Board = new Schema({
     type: Boolean,
     default: false
   },
-  user: {
+  userId: {
     type: Schema.Types.ObjectId,
     ref: 'User',
   }

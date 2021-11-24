@@ -4,7 +4,7 @@ import React, { useContext, useState } from 'react'
 import { Toast } from 'react-bootstrap'
 import { AuthContext } from 'contexts/AuthContext'
 import { Link } from 'react-router-dom'
-import { LoadingOutlined, LockOutlined, MailOutlined, UserOutlined } from '@ant-design/icons'
+import { LockOutlined, MailOutlined, UserOutlined } from '@ant-design/icons'
 
 function RegisterForm() {
 

@@ -1,16 +1,31 @@
 import { validationResult } from 'express-validator'
 import { BoardService } from '../services/BoardService'
+import { ObjectId } from 'mongodb'
+import { BoardModel } from '../models/Board'
 
-const store = async (req, res) => {
+const create = async (req, res) => {
   const errors = validationResult(req)
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() })
   }
+
+  const { title, userId } = req.body
+  console.log(ObjectId(userId))
+
   try {
-    const newBoard = await BoardService.store(req.body)
-    return res.status(200).json(newBoard)
+    const newBoard = new BoardModel({
+      title,
+      userId: ObjectId(userId)
+    })
+
+    await newBoard.save()
+    return res.status(200).json({
+      success: true,
+      newBoard
+    })
   } catch (error) {
     return res.status(500).json({
+      success: false,
       errors: error.message
     })
   }
@@ -41,7 +56,7 @@ const update = async (req, res) => {
 }
 
 export const BoardController = {
-  store,
+  create,
   getFullBoard,
   update
 }

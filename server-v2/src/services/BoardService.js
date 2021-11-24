@@ -1,15 +1,5 @@
 import { BoardModel } from "../models/Board"
-import { ObjectID } from "mongodb";
-
-const store = async (data) => {
-  try {
-    const newBoard = await new BoardModel(data)
-    newBoard.save()
-    return newBoard
-  } catch (error) {
-    throw new Error(error)
-  }
-}
+import { ObjectId } from "mongodb";
 
 const updateColumnOrder = async (boardId, columnId) => {
   try {
@@ -48,7 +38,7 @@ const update = async (id, data) => {
   try {
     const updatedData = {
       ...data,
-      columnOrder: data.columnOrder.map($i => ObjectID($i._id)),
+      columnOrder: data.columnOrder.map($i => ObjectId($i._id)),
       updatedAt: Date.now()
     }
 
@@ -64,7 +54,6 @@ const update = async (id, data) => {
 }
 
 export const BoardService = {
-  store,
   updateColumnOrder,
   getFullBoard,
   update
