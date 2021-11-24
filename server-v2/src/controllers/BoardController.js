@@ -3,6 +3,10 @@ import { BoardService } from '../services/BoardService'
 import { ObjectId } from 'mongodb'
 import { BoardModel } from '../models/Board'
 
+const get = async (req, res) => {
+  // const boards = BoardModel.find({ user })
+}
+
 const create = async (req, res) => {
   const errors = validationResult(req)
   if (!errors.isEmpty()) {
@@ -56,6 +60,7 @@ const update = async (req, res) => {
 }
 
 export const BoardController = {
+  get,
   create,
   getFullBoard,
   update
