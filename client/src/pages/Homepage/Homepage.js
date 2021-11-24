@@ -12,8 +12,6 @@ function Homepage() {
 
   const [visible, setVisible] = useState(false)
 
-  // console.log(user)
-
   return (
     <div>
       <AppBar />
@@ -21,7 +19,12 @@ function Homepage() {
       <Button type="primary" onClick={() => setVisible(true)}>
         Open Modal
       </Button>
-      <CreateBoardModal visible={visible} />
+      {visible &&
+        <CreateBoardModal
+          visible={visible}
+          handleCancel={() => setVisible(false)}
+        />
+      }
     </div>
   )
 }
