@@ -10,7 +10,10 @@ function CreateBoardModal(props) {
   const colors = initialColors
 
   const {
-    createNewBoard
+    createNewBoard,
+    boardState: {
+      boards
+    }
   } = useContext(BoardContext)
 
   const {
@@ -71,7 +74,7 @@ function CreateBoardModal(props) {
           alignItems: 'center'
         }}
       >
-        <div
+        <Form
           style={{
             width: '296px',
             height: '96px',
@@ -94,7 +97,7 @@ function CreateBoardModal(props) {
               onKeyDown={event => (event.key === 'Enter') && addNewBoard()}
             />
           </Form.Item>
-        </div>
+        </Form>
         <ul className='list-button'>
           {images.map((image, id) => (
             <li
