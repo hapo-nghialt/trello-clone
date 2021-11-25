@@ -1,4 +1,4 @@
-import { Button, Form, Input, Modal, Spin } from 'antd'
+import { Button, Form, Input, Modal } from 'antd'
 import { AuthContext } from 'contexts/AuthContext'
 import { BoardContext } from 'contexts/BoardContext'
 import React, { useContext, useState } from 'react'

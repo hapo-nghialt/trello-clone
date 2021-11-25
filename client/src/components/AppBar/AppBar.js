@@ -1,6 +1,5 @@
 import React, { useContext } from 'react'
-import { Avatar, Button, Dropdown, Menu } from 'antd'
-import { DownOutlined } from '@ant-design/icons'
+import { Avatar, Dropdown, Menu } from 'antd'
 
 import { AuthContext } from 'contexts/AuthContext'
 import './AppBar.scss'

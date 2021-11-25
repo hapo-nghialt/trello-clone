@@ -3,6 +3,7 @@ import React, { createContext, useEffect, useReducer, useState } from 'react'
 import { authReducer } from 'reducer/authReducer'
 import { API_ROOT, LOCAL_STORAGE_TOKEN_NAME } from 'utilities/constants'
 import setAuthToken from 'utilities/setAuthToken'
+import { sleep } from 'utilities/sleep'
 
 export const AuthContext = createContext()
 
@@ -74,9 +75,8 @@ const AuthContextProvider = ({ children }) => {
         )
       }
 
-      setTimeout(() => {
-        authenticatedUser()
-      }, 500)
+      await sleep(500)
+      authenticatedUser()
 
       return response.data
     } catch (error) {
@@ -95,11 +95,9 @@ const AuthContextProvider = ({ children }) => {
         )
       }
 
-      setTimeout(() => {
-        authenticatedUser()
-      }, 1000)
+      await sleep(1000)
+      authenticatedUser()
 
-      // await authenticatedUser()
       return response.data
     } catch (error) {
       if (error.response.data) return error.response.data
@@ -107,21 +105,20 @@ const AuthContextProvider = ({ children }) => {
   }
 
   // Log out
-  const logout = () => {
+  const logout = async () => {
     dispatch({
       type: 'SET_LOADING',
       payload: true
     })
     localStorage.removeItem(LOCAL_STORAGE_TOKEN_NAME)
-    setTimeout(() => {
-      dispatch({
-        type: 'SET_AUTH',
-        payload: {
-          isAuthenticated: false,
-          user: null
-        }
-      })
-    }, 1000)
+    await sleep(1000)
+    dispatch({
+      type: 'SET_AUTH',
+      payload: {
+        isAuthenticated: false,
+        user: null
+      }
+    })
   }
 
   const authContextData = {

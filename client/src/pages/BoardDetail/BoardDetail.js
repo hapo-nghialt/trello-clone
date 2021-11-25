@@ -9,14 +9,23 @@ function BoardDetail() {
   const { id } = useParams()
 
   const {
-    getBoardDetail
+    getBoardDetail,
+    boardState: { board }
   } = useContext(BoardContext)
+
+  const background = board ? board.background : null
 
   useEffect(() => {
     getBoardDetail(id)
   }, [])
   return (
-    <div className="trello-web">
+    <div
+      className='trello-web'
+      style={{
+        backgroundColor: background && background.type == 'color' && background.content,
+        backgroundImage: background && background.type == 'image' && background.content
+      }}
+    >
       <AppBar />
       <BoardBar />
       <BoardContent boardId={id}/>

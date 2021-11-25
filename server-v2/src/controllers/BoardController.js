@@ -43,8 +43,11 @@ const create = async (req, res) => {
 const getDetailBoard = async (req, res) => {
   try {
     const id = req.params.id
-    const result = await BoardService.getDetailBoard(id)
-    res.status(200).json(result)
+    const board = await BoardService.getDetailBoard(id)
+    res.status(200).json({
+      success: true,
+      board
+    })
   } catch (error) {
     return res.status(500).json({
       errors: error.message

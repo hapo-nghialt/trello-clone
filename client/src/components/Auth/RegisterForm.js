@@ -1,10 +1,11 @@
 import 'antd/dist/antd.css'
-import { Button, Card, Divider, Form, Input, Upload, Modal } from 'antd'
+import { Button, Card, Divider, Form, Input } from 'antd'
 import React, { useContext, useState } from 'react'
 import { Toast } from 'react-bootstrap'
 import { AuthContext } from 'contexts/AuthContext'
 import { Link } from 'react-router-dom'
 import { LockOutlined, MailOutlined, UserOutlined } from '@ant-design/icons'
+import { sleep } from 'utilities/sleep'
 
 function RegisterForm() {
 
@@ -19,9 +20,7 @@ function RegisterForm() {
 
   const onFinish = async (data) => {
     setButtonDisabled(true)
-    setTimeout(() => {
-      setButtonDisabled(false)
-    }, 2000)
+    await sleep(1000)
     const registerData = await register(data)
     setShowToast({
       show: true,

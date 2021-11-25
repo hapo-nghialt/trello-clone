@@ -8,7 +8,7 @@ import { applyDrag } from 'utilities/dragDrop'
 import { Container, Draggable } from 'react-smooth-dnd'
 
 import { Container as BootstrapContainer, Row, Col, Form, Button } from 'react-bootstrap'
-import { createNewColumn, fetchBoardDetails, updateBoard, updateColumn } from 'actions/Api'
+import { createNewColumn, updateBoard, updateColumn } from 'actions/Api'
 import { PlusOutlined } from '@ant-design/icons'
 import { BoardContext } from 'contexts/BoardContext'
 
