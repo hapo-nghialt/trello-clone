@@ -23,7 +23,7 @@ function CreateBoardModal(props) {
   const history = useHistory()
 
   const [backgroundImageInput, setBackgroundImageInput] = useState(images[0])
-  const [backgroundColorInput, setBackgroundColorInput] = useState('')
+  const [backgroundColorInput, setBackgroundColorInput] = useState(null)
   const { visible, handleOk, handleCancel } = props
 
   const [toggleButton, setToggleButton] = useState(true)
@@ -33,10 +33,10 @@ function CreateBoardModal(props) {
   const handleSetBackgroundInput = (data, type) => {
     if (type == 'color') {
       setBackgroundColorInput(data)
-      setBackgroundImageInput('')
+      setBackgroundImageInput(null)
     } else {
       setBackgroundImageInput(data)
-      setBackgroundColorInput('')
+      setBackgroundColorInput(null)
     }
   }
 
@@ -49,16 +49,22 @@ function CreateBoardModal(props) {
       setToggleButton(true)
       setNewBoardTitle('')
     }
+    // console.log(e.target.value?.e)
   }
 
   const addNewBoard = async () => {
     if (newBoardTitle) {
+      let background = {
+        type: backgroundImageInput ? 'image' : 'color',
+        content: backgroundImageInput ? backgroundImageInput : backgroundColorInput
+      }
       setToggleButton(true)
       setSpin(true)
       await sleep(1000)
       const newBoard = {
         title: newBoardTitle.trim(),
-        userId: user.user._id
+        userId: user.user._id,
+        background
       }
       const response = await createNewBoard(newBoard)
       if (response.success) {

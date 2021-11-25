@@ -1,5 +1,5 @@
 import Column from '../Column/Column'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { isEmpty } from 'lodash'
 import './BoardContent.scss'
 
@@ -10,9 +10,14 @@ import { Container, Draggable } from 'react-smooth-dnd'
 import { Container as BootstrapContainer, Row, Col, Form, Button } from 'react-bootstrap'
 import { createNewColumn, fetchBoardDetails, updateBoard, updateColumn } from 'actions/Api'
 import { PlusOutlined } from '@ant-design/icons'
+import { BoardContext } from 'contexts/BoardContext'
 
 export default function BoardContent(props) {
   const { boardId } = props
+
+  const {
+    getBoardDetail
+  } = useContext(BoardContext)
 
   const [board, setBoard] = useState({})
   const [columns, setColumns] = useState([])
@@ -25,7 +30,7 @@ export default function BoardContent(props) {
   const onNewColumnTitleChange = (e) => setNewColumnTitle(e.target.value)
 
   useEffect(() => {
-    fetchBoardDetails(boardId).then(board => {
+    getBoardDetail(boardId).then(board => {
       setBoard(board)
       setColumns(board.columnOrder)
     })

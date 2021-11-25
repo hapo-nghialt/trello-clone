@@ -31,6 +31,17 @@ const BoardContextProvider = ({ children }) => {
     }
   }
 
+  // Board detail
+  const getBoardDetail = async (id) => {
+    try {
+      const response = await axios.get(`${API_ROOT}/boards/${id}`)
+      console.log(response)
+      return response.data
+    } catch (error) {
+      if (error.response.data) return error.response.data
+    }
+  }
+
   // Create new board
   const createNewBoard = async (request) => {
     try {
@@ -49,6 +60,7 @@ const BoardContextProvider = ({ children }) => {
 
   const boardContextData = {
     createNewBoard,
+    getBoardDetail,
     getAllBoards,
     boardState
   }

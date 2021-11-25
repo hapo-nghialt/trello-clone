@@ -18,7 +18,7 @@ router.post(
 
 router.get(
   '/:id',
-  BoardController.getFullBoard
+  BoardController.getDetailBoard
 )
 
 router.put(

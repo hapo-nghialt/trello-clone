@@ -14,7 +14,7 @@ const updateColumnOrder = async (boardId, columnId) => {
   }
 }
 
-const getFullBoard = async (id) => {
+const getDetailBoard = async (id) => {
   try {
     const board = await BoardModel.findOne({
       _id: id,
@@ -55,6 +55,6 @@ const update = async (id, data) => {
 
 export const BoardService = {
   updateColumnOrder,
-  getFullBoard,
+  getDetailBoard,
   update
 }

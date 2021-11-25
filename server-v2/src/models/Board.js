@@ -9,6 +9,10 @@ let Board = new Schema({
     max: 20,
     trim: true
   },
+  background: {
+    type: Object,
+    default: null
+  },
   columnOrder: {
     type: Schema.Types.Array,
     default: [],
