@@ -9,8 +9,11 @@ import { Container, Draggable } from 'react-smooth-dnd'
 
 import { Container as BootstrapContainer, Row, Col, Form, Button } from 'react-bootstrap'
 import { createNewColumn, fetchBoardDetails, updateBoard, updateColumn } from 'actions/Api'
+import { PlusOutlined } from '@ant-design/icons'
 
-export default function BoardContent() {
+export default function BoardContent(props) {
+  const { boardId } = props
+
   const [board, setBoard] = useState({})
   const [columns, setColumns] = useState([])
   const [openNewColumnForm, setOpenNewColumnForm] = useState(false)
@@ -22,7 +25,6 @@ export default function BoardContent() {
   const onNewColumnTitleChange = (e) => setNewColumnTitle(e.target.value)
 
   useEffect(() => {
-    const boardId = '61854fb25943dc2dc4be5d8d'
     fetchBoardDetails(boardId).then(board => {
       setBoard(board)
       setColumns(board.columnOrder)
@@ -142,8 +144,20 @@ export default function BoardContent() {
       <BootstrapContainer className="trello-container">
         {!openNewColumnForm &&
           <Row>
-            <Col className="add-new-column" onClick={toggleOpenNewColumnForm}>
-              <i className="fa fa-plus icon" /> Add another column
+            <Col
+              className="add-new-column"
+              onClick={toggleOpenNewColumnForm}
+              style={{
+                display: 'flex',
+                alignItems: 'center'
+              }}
+            >
+              <PlusOutlined
+                style={{
+                  marginRight: '5px',
+                  fontSize: '13px'
+                }}
+              /> Add another column
             </Col>
           </Row>
         }

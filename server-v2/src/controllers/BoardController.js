@@ -4,7 +4,11 @@ import { ObjectId } from 'mongodb'
 import { BoardModel } from '../models/Board'
 
 const get = async (req, res) => {
-  // const boards = BoardModel.find({ user })
+  const boards = await BoardModel.find({ userId: ObjectId(req.userId) }).exec()
+  return res.status(200).json({
+    success: true,
+    boards
+  })
 }
 
 const create = async (req, res) => {
@@ -14,7 +18,6 @@ const create = async (req, res) => {
   }
 
   const { title, userId } = req.body
-  console.log(ObjectId(userId))
 
   try {
     const newBoard = new BoardModel({

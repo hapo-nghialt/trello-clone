@@ -1,4 +1,4 @@
-import { CREATE_BOARD } from 'contexts/constants';
+import { CREATE_BOARD, GET_ALL_BOARDS } from 'contexts/constants';
 
 export const boardReducer = (state, action) => {
   const { type, payload } = action
@@ -7,6 +7,13 @@ export const boardReducer = (state, action) => {
     return {
       ...state,
       boards: [...state.boards, payload]
+    }
+
+  case GET_ALL_BOARDS:
+    return {
+      ...state,
+      boards: payload,
+      boardsLoading: false
     }
   }
 }

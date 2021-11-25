@@ -30,7 +30,7 @@ function App() {
             />
 
             <ProtectedRoute exact path='/:id/boards' component={Homepage} />
-            <ProtectedRoute exact path='/board' component={BoardDetail} />
+            <ProtectedRoute exact path='/board/:id' component={BoardDetail} />
           </Switch>
         </Router>
       </BoardContextProvider>

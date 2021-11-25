@@ -1,8 +1,11 @@
-import { Button, Form, Input, Modal } from 'antd'
+import { Button, Form, Input, Modal, Spin } from 'antd'
 import { AuthContext } from 'contexts/AuthContext'
 import { BoardContext } from 'contexts/BoardContext'
 import React, { useContext, useState } from 'react'
+import { Spinner } from 'react-bootstrap'
+import { useHistory } from 'react-router'
 import { initialColors, initialImages } from 'utilities/constants'
+import { sleep } from 'utilities/sleep'
 import './Common.scss'
 
 function CreateBoardModal(props) {
@@ -10,15 +13,14 @@ function CreateBoardModal(props) {
   const colors = initialColors
 
   const {
-    createNewBoard,
-    boardState: {
-      boards
-    }
+    createNewBoard
   } = useContext(BoardContext)
 
   const {
     authState: user
   } = useContext(AuthContext)
+
+  const history = useHistory()
 
   const [backgroundImageInput, setBackgroundImageInput] = useState(images[0])
   const [backgroundColorInput, setBackgroundColorInput] = useState('')
@@ -26,6 +28,7 @@ function CreateBoardModal(props) {
 
   const [toggleButton, setToggleButton] = useState(true)
   const [newBoardTitle, setNewBoardTitle] = useState('')
+  const [spin, setSpin] = useState(false)
 
   const handleSetBackgroundInput = (data, type) => {
     if (type == 'color') {
@@ -50,11 +53,17 @@ function CreateBoardModal(props) {
 
   const addNewBoard = async () => {
     if (newBoardTitle) {
+      setToggleButton(true)
+      setSpin(true)
+      await sleep(1000)
       const newBoard = {
         title: newBoardTitle.trim(),
         userId: user.user._id
       }
-      await createNewBoard(newBoard)
+      const response = await createNewBoard(newBoard)
+      if (response.success) {
+        history.push('./../board/' + response.newBoard._id)
+      }
     }
     return
   }
@@ -127,6 +136,9 @@ function CreateBoardModal(props) {
           onClick={addNewBoard}
         >
           Create board
+          {spin &&
+            <Spinner animation='border' size='sm' style={{ marginLeft: '10px' }} />
+          }
         </Button>
       </div>
     </Modal>

@@ -2,7 +2,7 @@ import axios from 'axios'
 import React, { createContext, useReducer } from 'react'
 import { boardReducer } from 'reducer/boardReducer'
 import { API_ROOT } from 'utilities/constants'
-import { CREATE_BOARD, GET_ALL_BOARDS_FALSE } from './constants'
+import { CREATE_BOARD, GET_ALL_BOARDS, GET_ALL_BOARDS_FALSE } from './constants'
 
 export const BoardContext = createContext()
 
@@ -15,14 +15,20 @@ const BoardContextProvider = ({ children }) => {
   })
 
   // Get all boards
-  const getAllBoard = async () => {
-    // try {
-      
-    // } catch (error) {
-    //   dispatch({
-    //     type: GET_ALL_BOARDS_FALSE
-    //   })
-    // }
+  const getAllBoards = async () => {
+    try {
+      const response = await axios.get(`${API_ROOT}/boards`)
+      if (response.data.success) {
+        dispatch({
+          type: GET_ALL_BOARDS,
+          payload: response.data.boards
+        })
+      }
+    } catch (error) {
+      dispatch({
+        type: GET_ALL_BOARDS_FALSE
+      })
+    }
   }
 
   // Create new board
@@ -37,12 +43,13 @@ const BoardContextProvider = ({ children }) => {
       }
       return response.data
     } catch (error) {
-      console.log(error)
+      if (error.response.data) return error.response.data
     }
   }
 
   const boardContextData = {
     createNewBoard,
+    getAllBoards,
     boardState
   }
   return (
