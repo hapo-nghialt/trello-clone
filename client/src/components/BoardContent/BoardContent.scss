@@ -30,34 +30,38 @@
     margin: 5px 45px 5px 5px;
   }
 
-  .add-new-column {
+  .form-add-new-column {
     width: 270px;
     max-width: 270px;
     line-height: 32px;
-    cursor: pointer;
-    color: #172b4d;
     margin-left: $gap;
-    font-size: 15px;
-    padding: 4px 10px;
-    background-color: hsla(0, 0%, 100%, .24);
-    border-radius: 5px;
 
-    &:hover {
-      background-color: hsla(0, 0%, 100%, .34);
+    .add-new-column,
+    .enter-new-column {
+      flex: auto;
+      line-height: 32px;
+      padding: 4px 10px;
+      border-radius: 3px;
     }
-  }
 
-  .enter-new-column {
-    width: 270px;
-    max-width: 270px;
-    background-color: $column-bg-color;
-    margin-left: $gap;
-    line-height: 32px;
-    padding: 4px 10px;
-    border-radius: 5px;
+    .add-new-column {
+      cursor: pointer;
+      background-color: hsla(0, 0%, 100%, .24);
+      color: #fff;
+      display: flex;
+      align-items: center;
 
-    input.input-enter-new-column {
-      margin: 5px 0;
+      &:hover {
+        background-color: hsla(0, 0%, 100%, .34);
+      }
+    }
+
+    .enter-new-column {
+      background-color: $column-bg-color;
+  
+      input.input-enter-new-column {
+        margin: 5px 0;
+      }
     }
   }
 

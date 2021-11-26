@@ -19,7 +19,8 @@ export const boardReducer = (state, action) => {
   case GET_DETAIL_BOARD:
     return {
       ...state,
-      board: payload
+      board: payload,
+      boardsLoading: false
     }
   }
 }

@@ -10,6 +10,7 @@ import { saveContentAfterPressEnter, selectAllInlineText } from 'utilities/conte
 
 import { cloneDeep } from 'lodash'
 import { createNewCard, updateColumn } from 'actions/Api'
+import { PlusOutlined } from '@ant-design/icons'
 
 export default function Column(props) {
   const { column, onCardDrop, onUpdateColumnState } = props
@@ -180,7 +181,12 @@ export default function Column(props) {
         }
         {!openNewCardForm &&
           <div className="footer-actions" onClick={toggleOpenNewCardForm}>
-            <i className="fa fa-plus icon" /> Add another card
+            <PlusOutlined
+              style={{
+                marginRight: '5px',
+                fontSize: '13px'
+              }}
+            /> Add another card
           </div>
         }
       </footer>

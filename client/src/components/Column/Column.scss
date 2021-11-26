@@ -88,6 +88,8 @@ $column-height: calc(#{$board-content-height} - #{$gap * 2});
     .footer-actions {
       margin-left: 5px;
       cursor: pointer;
+      display: flex;
+      align-items: center;
       &:hover {
         color: $app-main-text-color;
       }

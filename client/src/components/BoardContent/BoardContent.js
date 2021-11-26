@@ -22,7 +22,41 @@ export default function BoardContent(props) {
   const [board, setBoard] = useState({})
   const [columns, setColumns] = useState([])
   const [openNewColumnForm, setOpenNewColumnForm] = useState(false)
-  const toggleOpenNewColumnForm = () => setOpenNewColumnForm(!openNewColumnForm)
+  const [styleAddColumn, setStyleAddColumn] = useState({
+    height: 'auto',
+    opacity: '1'
+  })
+  const [styleEnterColumn, setStyleEnterColumn] = useState({
+    height: '0',
+    opacity: '0'
+  })
+
+  const toggleOpenNewColumnForm = () => {
+    setOpenNewColumnForm(!openNewColumnForm)
+
+    if (openNewColumnForm) {
+      setStyleAddColumn ({
+        height: 'auto',
+        opacity: '1',
+        transition: 'height 0ms 0ms, opacity 600ms 0ms'
+      })
+      setStyleEnterColumn({
+        height: '0',
+        opacity: '0'
+      })
+    } else {
+      setStyleAddColumn ({
+        height: '0',
+        opacity: '0',
+        padding: '0'
+      })
+      setStyleEnterColumn({
+        height: 'auto',
+        opacity: '1',
+        transition: 'height 0ms 0ms, opacity 600ms 0ms'
+      })
+    }
+  }
 
   const newColumnInputRef = useRef(null)
 
@@ -44,7 +78,7 @@ export default function BoardContent(props) {
   }, [openNewColumnForm])
 
   if (isEmpty(board)) {
-    return <div className="board-not-found" style={{ 'padding': '10px', 'color': '#fff' }}>Board not found</div>
+    return <div className='board-not-found' style={{ 'padding': '10px', 'color': '#fff' }}>Board not found</div>
   }
 
   const onColumnDrop = (dropResult) => {
@@ -123,12 +157,12 @@ export default function BoardContent(props) {
   }
 
   return (
-    <div className="board-content">
+    <div className='board-content'>
       <Container
-        orientation="horizontal"
+        orientation='horizontal'
         onDrop={onColumnDrop}
         getChildPayload={index => columns[index]}
-        dragHandleSelector=".column-drag-handle"
+        dragHandleSelector='.column-drag-handle'
         dropPlaceholder={{
           animationDuration: 150,
           showOnTop: true,
@@ -146,44 +180,38 @@ export default function BoardContent(props) {
         ))}
       </Container>
 
-      <BootstrapContainer className="trello-container">
-        {!openNewColumnForm &&
-          <Row>
-            <Col
-              className="add-new-column"
-              onClick={toggleOpenNewColumnForm}
+      <BootstrapContainer className='trello-container'>
+        <Row className='form-add-new-column'>
+          <Col
+            className='add-new-column'
+            onClick={toggleOpenNewColumnForm}
+            style={styleAddColumn}
+          >
+            <PlusOutlined
               style={{
-                display: 'flex',
-                alignItems: 'center'
+                marginRight: '5px',
+                fontSize: '13px'
               }}
-            >
-              <PlusOutlined
-                style={{
-                  marginRight: '5px',
-                  fontSize: '13px'
-                }}
-              /> Add another column
-            </Col>
-          </Row>
-        }
-        {openNewColumnForm &&
-          <Row>
-            <Col className="enter-new-column">
-              <Form.Control
-                size="sm"
-                type="text"
-                placeholder="Enter column title..."
-                className="input-enter-new-column"
-                ref={newColumnInputRef}
-                value={newColumnTitle}
-                onChange={onNewColumnTitleChange}
-                onKeyDown={event => (event.key === 'Enter') && addNewColumn()}
-              />
-              <Button variant="success" size="sm" onClick={addNewColumn}>Add column</Button>
-              <span className="cancel-icon" onClick={toggleOpenNewColumnForm}><i className="fa fa-times icon" /></span>
-            </Col>
-          </Row>
-        }
+            /> Add a list
+          </Col>
+          <Col
+            className='enter-new-column'
+            style={styleEnterColumn}
+          >
+            <Form.Control
+              size='sm'
+              type='text'
+              placeholder='Enter column title...'
+              className='input-enter-new-column'
+              ref={newColumnInputRef}
+              value={newColumnTitle}
+              onChange={onNewColumnTitleChange}
+              onKeyDown={event => (event.key === 'Enter') && addNewColumn()}
+            />
+            <Button variant='success' size='sm' onClick={addNewColumn}>Add column</Button>
+            <span className='cancel-icon' onClick={toggleOpenNewColumnForm}><i className='fa fa-times icon' /></span>
+          </Col>
+        </Row>
       </BootstrapContainer>
     </div>
   )

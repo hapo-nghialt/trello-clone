@@ -1,5 +1,6 @@
 import { BoardContext } from 'contexts/BoardContext'
 import React, { useContext, useEffect } from 'react'
+import { Spinner } from 'react-bootstrap'
 import { useParams } from 'react-router'
 import AppBar from '../../components/AppBar/AppBar'
 import BoardBar from '../../components/BoardBar/BoardBar'
@@ -10,26 +11,47 @@ function BoardDetail() {
 
   const {
     getBoardDetail,
-    boardState: { board }
+    boardState: { board, boardsLoading }
   } = useContext(BoardContext)
-
-  const background = board ? board.background : null
 
   useEffect(() => {
     getBoardDetail(id)
   }, [])
+
+  let body
+
+  if (boardsLoading) {
+    body = (
+      <div>
+        <Spinner animation='border' variant='info' style={{
+          position: 'fixed',
+          top: '45%',
+          left: '50%'
+        }}/>
+      </div>
+    )
+  } else {
+    let background = board.background
+
+    body = (
+      <div
+        className='trello-web'
+        style={{
+          backgroundColor: background.type == 'color' && background.content,
+          backgroundImage: background.type == 'image' && 'url("' + background.content + '")'
+        }}
+      >
+        <AppBar />
+        <BoardBar />
+        <BoardContent boardId={id}/>
+      </div>
+    )
+  }
+
   return (
-    <div
-      className='trello-web'
-      style={{
-        backgroundColor: background && background.type == 'color' && background.content,
-        backgroundImage: background && background.type == 'image' && background.content
-      }}
-    >
-      <AppBar />
-      <BoardBar />
-      <BoardContent boardId={id}/>
-    </div>
+    <>
+      { body }
+    </>
   )
 }
 
