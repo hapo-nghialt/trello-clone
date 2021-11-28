@@ -8,7 +8,7 @@ export default function Card(props) {
   const [showDetailCard, setShowDetailCard] = useState(false)
 
   const onActionCardDetail = (type) => {
-    console.log(type)
+    setShowDetailCard(false)
   }
 
   return (

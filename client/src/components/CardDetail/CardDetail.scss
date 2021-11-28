@@ -1,0 +1,11 @@
+.modal-detail-card {
+  width: 768px !important;
+
+  .detail-card-header {
+    position: relative;
+
+    .detail-card-header-icon {
+      position: absolute;
+    }
+  }
+}

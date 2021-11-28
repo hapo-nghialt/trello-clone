@@ -1,4 +1,6 @@
 .create-board-modal {
+  width: 410px !important;
+
   .input-create-board {
     border: none;
     font-weight: bold;
@@ -49,10 +51,6 @@
   .ant-modal-body {
     padding: 0;
   }
-}
-
-.ant-modal {
-  width: 410px !important;
 }
 
 .ant-modal-mask {

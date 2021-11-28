@@ -47,7 +47,6 @@ export default function Column(props) {
 
   // Remove column
   const onConfirmModalAction = (type) => {
-    console.log(type)
     if (type === MODAL_ACTION_CONFIRM) {
       const newColumn = {
         ... column,
