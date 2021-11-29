@@ -1,5 +1,5 @@
 import CardDetail from 'components/CardDetail/CardDetail'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import './Card.scss'
 
 export default function Card(props) {
@@ -14,7 +14,7 @@ export default function Card(props) {
   }
 
   const showCard = () => {
-    console.log(card);
+    console.log(card)
     setShowDetailCard(true)
     setColumnId(card.columnId)
   }
