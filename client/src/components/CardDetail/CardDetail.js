@@ -5,7 +5,7 @@ import { MODAL_ACTION_CLOSE, MODAL_ACTION_CONFIRM } from 'utilities/constants'
 import { Window } from 'react-bootstrap-icons'
 
 export default function CardDetail(props) {
-  const { showDetailCard, card, onAction } = props
+  const { showDetailCard, card, onAction, columnId } = props
 
   return (
     <div>
@@ -18,6 +18,7 @@ export default function CardDetail(props) {
         <div className='detail-card-header'>
           <span className='detail-card-header-icon'><Window /></span>
           <div className='detail-card-title'>{card.title}</div>
+          <div className='detail-card-inline'>in list </div>
         </div>
       </Modal>
     </div>

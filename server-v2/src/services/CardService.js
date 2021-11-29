@@ -13,7 +13,6 @@ const store = async (data) => {
 }
 
 const deleteMany = async (cards) => {
-  console.log(cards);
   try {
     const result = await CardModel.updateMany(
       { _id: { $in: cards } },

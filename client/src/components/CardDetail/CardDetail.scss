@@ -1,11 +1,24 @@
 .modal-detail-card {
   width: 768px !important;
+  top: 48px !important;
+
+  .ant-modal-body {
+    padding-top: 16px;
+  }
 
   .detail-card-header {
     position: relative;
+    margin-left: 32px;
 
     .detail-card-header-icon {
       position: absolute;
+      left: -20px;
+      font-size: 18px;
+    }
+
+    .detail-card-title {
+      font-size: 20px;
+      font-weight: 600;
     }
   }
 }

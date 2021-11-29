@@ -9,4 +9,9 @@ router.post(
   CardController.store
 )
 
+router.put(
+  '/:id',
+  CardController.update
+)
+
 export const cardRoutes = router

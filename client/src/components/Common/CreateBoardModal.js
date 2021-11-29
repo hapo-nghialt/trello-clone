@@ -49,7 +49,6 @@ function CreateBoardModal(props) {
       setToggleButton(true)
       setNewBoardTitle('')
     }
-    // console.log(e.target.value?.e)
   }
 
   const addNewBoard = async () => {

@@ -139,8 +139,7 @@ export default function Column(props) {
         <Container
           groupName="col"
           onDrop={dropResult => onCardDrop(column._id, dropResult)}
-          getChildPayload={index => cards[index]
-          }
+          getChildPayload={ index => cards[index] }
           dragClass="card-ghost"
           dropClass="card-ghost-drop"
           dropPlaceholder={{
@@ -152,7 +151,9 @@ export default function Column(props) {
         >
           {cards.map((card, index) => (
             <Draggable key={index} >
-              <Card card={card} />
+              <Card
+                card={card}
+              />
             </Draggable>
           ))}
         </Container>

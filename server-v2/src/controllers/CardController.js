@@ -1,6 +1,7 @@
 import { validationResult } from 'express-validator'
+import { CardModel } from '../models/Card'
 import { CardService } from '../services/CardService'
-import { ColumnController } from './ColumnController'
+import { ObjectId } from 'mongodb'
 
 const store = async (req, res) => {
   const errors = validationResult(req)
@@ -12,9 +13,34 @@ const store = async (req, res) => {
     return res.status(200).json(newCard)
   } catch (error) {
     return res.status(500).json({
+      success: false,
       errors: error.message
     })
   }
 }
 
-export const CardController = { store }
+const update = async (req, res) => {
+  const columnId = req.body._id
+  const id = req.params.id
+
+  try {
+    const card = await CardModel.findByIdAndUpdate(
+      id,
+      { columnId: ObjectId(columnId) },
+      { returnOriginal: false }
+    ).exec()
+
+    return res.status(200).json({
+      success: true,
+      card
+    })
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      errors: error.message
+    })
+    
+  }
+}
+
+export const CardController = { store, update }

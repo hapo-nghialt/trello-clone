@@ -1,6 +1,6 @@
 import Column from '../Column/Column'
 import React, { useContext, useEffect, useRef, useState } from 'react'
-import { isEmpty } from 'lodash'
+import { cloneDeep, isEmpty } from 'lodash'
 import './BoardContent.scss'
 
 import { applyDrag } from 'utilities/dragDrop'
@@ -8,7 +8,7 @@ import { applyDrag } from 'utilities/dragDrop'
 import { Container, Draggable } from 'react-smooth-dnd'
 
 import { Container as BootstrapContainer, Row, Col, Form, Button } from 'react-bootstrap'
-import { createNewColumn, updateBoard, updateColumn } from 'actions/Api'
+import { createNewColumn, updateBoard, updateCard, updateColumn } from 'actions/Api'
 import { PlusOutlined } from '@ant-design/icons'
 import { BoardContext } from 'contexts/BoardContext'
 
@@ -21,14 +21,17 @@ export default function BoardContent(props) {
 
   const [board, setBoard] = useState({})
   const [columns, setColumns] = useState([])
+
   const [openNewColumnForm, setOpenNewColumnForm] = useState(false)
+
   const [styleAddColumn, setStyleAddColumn] = useState({
     height: 'auto',
     opacity: '1'
   })
   const [styleEnterColumn, setStyleEnterColumn] = useState({
     height: '0',
-    opacity: '0'
+    opacity: '0',
+    display: 'none'
   })
 
   const toggleOpenNewColumnForm = () => {
@@ -42,7 +45,8 @@ export default function BoardContent(props) {
       })
       setStyleEnterColumn({
         height: '0',
-        opacity: '0'
+        opacity: '0',
+        display: 'none'
       })
     } else {
       setStyleAddColumn ({
@@ -100,8 +104,17 @@ export default function BoardContent(props) {
 
       let currentColumn = newColumns.find(c => c._id === columnId)
       currentColumn.cardOrder = applyDrag(currentColumn.cardOrder, dropResult)
-      setColumns(newColumns)
 
+      if (dropResult.removedIndex == null) {
+        const currentCard = cloneDeep(dropResult.payload)
+        let cardIndex = currentColumn.cardOrder.findIndex(x => x._id == currentCard._id)
+        updateCard(currentCard._id, currentColumn)
+          .then(response => {
+            currentColumn.cardOrder[cardIndex] = response.card
+          })
+      }
+
+      setColumns(newColumns)
       updateColumn(currentColumn._id, currentColumn)
     }
   }
