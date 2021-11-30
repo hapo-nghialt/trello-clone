@@ -7,6 +7,8 @@ import { Window } from 'react-bootstrap-icons'
 export default function CardDetail(props) {
   const { showDetailCard, card, onAction, columnId } = props
 
+  console.log(columnId)
+
   return (
     <div>
       <Modal

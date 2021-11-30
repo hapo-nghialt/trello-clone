@@ -3,20 +3,16 @@ import React, { useState } from 'react'
 import './Card.scss'
 
 export default function Card(props) {
-  const { card } = props
+  const { card, column } = props
 
   const [showDetailCard, setShowDetailCard] = useState(false)
-  const [columnId, setColumnId] = useState(null)
 
   const onActionCardDetail = () => {
     setShowDetailCard(false)
-    setColumnId(null)
   }
 
   const showCard = () => {
-    console.log(card)
     setShowDetailCard(true)
-    setColumnId(card.columnId)
   }
 
   return (
@@ -28,7 +24,7 @@ export default function Card(props) {
         {card.cover && <img src={card.cover} className="card-cover" alt="" draggable="false"/>}
         {card.title}
       </div>
-      <CardDetail showDetailCard={showDetailCard} card={card} onAction={onActionCardDetail} columnId={columnId}/>
+      <CardDetail showDetailCard={showDetailCard} card={card} onAction={onActionCardDetail} column={column}/>
     </>
   )
 }

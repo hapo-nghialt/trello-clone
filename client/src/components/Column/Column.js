@@ -153,6 +153,7 @@ export default function Column(props) {
             <Draggable key={index} >
               <Card
                 card={card}
+                column = {column}
               />
             </Draggable>
           ))}

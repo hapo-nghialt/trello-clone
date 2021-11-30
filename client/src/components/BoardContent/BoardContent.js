@@ -109,9 +109,7 @@ export default function BoardContent(props) {
         const currentCard = cloneDeep(dropResult.payload)
         let cardIndex = currentColumn.cardOrder.findIndex(x => x._id == currentCard._id)
         updateCard(currentCard._id, currentColumn)
-          .then(response => {
-            currentColumn.cardOrder[cardIndex] = response.card
-          })
+        currentColumn.cardOrder[cardIndex].columnId = currentColumn._id
       }
 
       setColumns(newColumns)
