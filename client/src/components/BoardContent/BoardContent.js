@@ -106,9 +106,11 @@ export default function BoardContent(props) {
       currentColumn.cardOrder = applyDrag(currentColumn.cardOrder, dropResult)
 
       if (dropResult.removedIndex == null) {
-        const currentCard = cloneDeep(dropResult.payload)
-        let cardIndex = currentColumn.cardOrder.findIndex(x => x._id == currentCard._id)
-        updateCard(currentCard._id, currentColumn)
+        const updatedCard = cloneDeep(dropResult.payload)
+        updatedCard.columnId = currentColumn._id
+        let cardIndex = currentColumn.cardOrder.findIndex(x => x._id == updatedCard._id)
+
+        updateCard(updatedCard._id, updatedCard)
         currentColumn.cardOrder[cardIndex].columnId = currentColumn._id
       }
 

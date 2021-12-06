@@ -20,13 +20,12 @@ const store = async (req, res) => {
 }
 
 const update = async (req, res) => {
-  const columnId = req.body._id
-  const id = req.params.id
+  const updatedCard = req.body
 
   try {
     const card = await CardModel.findByIdAndUpdate(
-      id,
-      { columnId: ObjectId(columnId) },
+      updatedCard._id,
+      updatedCard,
       { returnOriginal: false }
     ).exec()
 

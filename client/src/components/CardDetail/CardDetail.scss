@@ -1,24 +1,65 @@
 .modal-detail-card {
   width: 768px !important;
   top: 48px !important;
+  padding: 0 !important;
+
+  @mixin detail-card-icon {
+    position: absolute;
+    left: -30px;
+    font-size: 20px;
+  }
 
   .ant-modal-body {
     padding-top: 16px;
+    margin-left: 32px;
+  }
+
+  .ant-modal-content {
+    background-color: #f4f5f7;
   }
 
   .detail-card-header {
     position: relative;
-    margin-left: 32px;
 
     .detail-card-header-icon {
-      position: absolute;
-      left: -20px;
-      font-size: 18px;
+      @include detail-card-icon;
     }
 
     .detail-card-title {
       font-size: 20px;
       font-weight: 600;
+    }
+  }
+
+  .detail-card-main {
+    position: relative;
+    margin-top: 20px;
+    width: 550px;
+    
+    .detail-card-main-icon {
+      @include detail-card-icon;
+    }
+
+    h3 {
+      padding-top: 6px;
+    }
+
+    .description-text-area {
+      margin-top: 15px;
+      border: none;
+      resize: none;
+      width: 100%;
+      min-height: 108px;
+      border-radius: 3px;
+      padding: 6px 12px;
+    }
+    
+    .active-text-area {
+      min-height: 60px;
+      font-size: 14px;
+      border-radius: 3px;
+      cursor: pointer;
+      white-space: pre-line;
     }
   }
 }

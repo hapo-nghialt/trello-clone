@@ -17,6 +17,10 @@ let Card = new Schema({
     max: 20,
     trim: true
   },
+  description: {
+    type: String,
+    default: null
+  },
   cover: {
     type: String,
     default: null
