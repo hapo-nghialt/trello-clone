@@ -62,4 +62,8 @@
       white-space: pre-line;
     }
   }
+
+  .detail-sidebar {
+    width: calc(100% - 550px);
+  }
 }

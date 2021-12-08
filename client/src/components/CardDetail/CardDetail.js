@@ -76,44 +76,49 @@ export default function CardDetail(props) {
           <div className='detail-card-title'>{card.title}</div>
           <div className='detail-card-inline'>in list <u>{column.title}</u></div>
         </div>
-        <div className='detail-card-main'>
-          <span className='detail-card-main-icon'><JustifyLeft /></span>
-          <h3 style={{ fontWeight: '700' }}>Description</h3>
-          {showTextArea ?
-            <>
-              <Form onFinish={handleSaveDescription}>
-                <Form.Item
-                  name='description'
-                  initialValue={card.description ? card.description : ''}
-                >
-                  <TextareaAutosize
-                    className='description-text-area'
-                    rows={3}
-                    placeholder='Add a more detailed description...'
-                    ref={newDetailCardTextAreaRef}
+        <div style={{ display: 'flex' }}>
+          <div className='detail-card-main'>
+            <span className='detail-card-main-icon'><JustifyLeft /></span>
+            <h3 style={{ fontWeight: '700' }}>Description</h3>
+            {showTextArea ?
+              <>
+                <Form onFinish={handleSaveDescription}>
+                  <Form.Item
+                    name='description'
+                    initialValue={card.description ? card.description : ''}
+                  >
+                    <TextareaAutosize
+                      className='description-text-area'
+                      rows={3}
+                      placeholder='Add a more detailed description...'
+                      ref={newDetailCardTextAreaRef}
+                    />
+                  </Form.Item>
+                  <Button
+                    type='primary'
+                    htmlType='submit'
+                    style={{ marginTop: '5px' }}
+                  >Save</Button>
+                  <XLg
+                    style={{
+                      fontSize: '18px',
+                      marginLeft: '10px',
+                      cursor: 'pointer'
+                    }}
+                    onClick={toggleShowTextArea}
                   />
-                </Form.Item>
-                <Button
-                  type='primary'
-                  htmlType='submit'
-                  style={{ marginTop: '5px' }}
-                >Save</Button>
-                <XLg
-                  style={{
-                    fontSize: '18px',
-                    marginLeft: '10px',
-                    cursor: 'pointer'
-                  }}
-                  onClick={toggleShowTextArea}
-                />
-              </Form>
-            </>
-            : <div
-              className='active-text-area'
-              onClick={toggleShowTextArea}
-              style={styleDescription}
-            >{description}</div>
-          }
+                </Form>
+              </>
+              : <div
+                className='active-text-area'
+                onClick={toggleShowTextArea}
+                style={styleDescription}
+              >{description}</div>
+            }
+          </div>
+          <div className='detail-sidebar'>
+            <p>Add to card</p>
+          </div>
         </div>
       </Modal>
     </div>
