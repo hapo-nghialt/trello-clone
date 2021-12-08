@@ -18,8 +18,6 @@ function BoardDetail() {
     getBoardDetail(id)
   }, [])
 
-  // console.log(board)
-
   let body
 
   if (boardsLoading) {
