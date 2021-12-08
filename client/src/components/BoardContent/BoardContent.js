@@ -10,14 +10,9 @@ import { Container, Draggable } from 'react-smooth-dnd'
 import { Container as BootstrapContainer, Row, Col, Form, Button } from 'react-bootstrap'
 import { createNewColumn, updateBoard, updateCard, updateColumn } from 'actions/Api'
 import { PlusOutlined } from '@ant-design/icons'
-import { BoardContext } from 'contexts/BoardContext'
 
 export default function BoardContent(props) {
-  const { boardId } = props
-
-  const {
-    getBoardDetail
-  } = useContext(BoardContext)
+  const { boardProps } = props
 
   const [board, setBoard] = useState({})
   const [columns, setColumns] = useState([])
@@ -68,10 +63,8 @@ export default function BoardContent(props) {
   const onNewColumnTitleChange = (e) => setNewColumnTitle(e.target.value)
 
   useEffect(() => {
-    getBoardDetail(boardId).then(board => {
-      setBoard(board)
-      setColumns(board.columnOrder)
-    })
+    setBoard(boardProps)
+    setColumns(boardProps.columnOrder)
   }, [])
 
   useEffect(() => {
@@ -126,7 +119,7 @@ export default function BoardContent(props) {
     }
 
     const newColumnToAdd = {
-      boardId: board._id,
+      boardProps: board._id,
       title: newColumnTitle.trim()
     }
 

@@ -5,7 +5,7 @@ import { AuthContext } from 'contexts/AuthContext'
 import './AppBar.scss'
 import { Link } from 'react-router-dom'
 
-import imgLogo from '../../assets/img/img-logo.gif'
+import imgLogo from '../../assets/img/img-logo.png'
 
 export default function AppBar() {
   const {
@@ -27,7 +27,7 @@ export default function AppBar() {
   return (
     <nav className='navbar-app'>
       <Link to={`../${user.username}/boards`}>
-        <img src={imgLogo} style={{ height: '44px', marginLeft: '-30px' }} />
+        <img src={imgLogo} style={{ height: '44px' }} />
       </Link>
       <div style={{
         paddingRight: '10px'

@@ -1,7 +1,8 @@
 import axios from 'axios'
-import React, { createContext, useReducer } from 'react'
+import React, { createContext, useEffect, useReducer } from 'react'
 import { boardReducer } from 'reducer/boardReducer'
 import { API_ROOT } from 'utilities/constants'
+import { sleep } from 'utilities/sleep'
 import { CREATE_BOARD, GET_ALL_BOARDS, GET_ALL_BOARDS_FALSE, GET_DETAIL_BOARD } from './constants'
 
 export const BoardContext = createContext()
@@ -34,7 +35,12 @@ const BoardContextProvider = ({ children }) => {
   // Board detail
   const getBoardDetail = async (id) => {
     try {
+      dispatch({
+        type: 'SET_LOADING',
+        payload: true
+      })
       const response = await axios.get(`${API_ROOT}/boards/${id}`)
+      await sleep(1000)
       if (response.data.success) {
         dispatch({
           type: GET_DETAIL_BOARD,

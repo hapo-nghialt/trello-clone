@@ -1,10 +1,9 @@
 import './CardDetail.scss'
 import React, { useEffect, useRef, useState } from 'react'
 import { Button, Modal, Form } from 'antd'
-import { MODAL_ACTION_CLOSE, MODAL_ACTION_CONFIRM } from 'utilities/constants'
+import { MODAL_ACTION_CLOSE } from 'utilities/constants'
 import { JustifyLeft, Window, XLg } from 'react-bootstrap-icons'
 import TextareaAutosize from 'react-textarea-autosize'
-import cloneDeep from 'lodash.clonedeep'
 import { updateCard } from 'actions/Api'
 
 export default function CardDetail(props) {

@@ -18,6 +18,8 @@ function BoardDetail() {
     getBoardDetail(id)
   }, [])
 
+  // console.log(board)
+
   let body
 
   if (boardsLoading) {
@@ -30,7 +32,7 @@ function BoardDetail() {
         }}/>
       </div>
     )
-  } else {
+  } else if (board) {
     let background = board.background
 
     body = (
@@ -43,7 +45,7 @@ function BoardDetail() {
       >
         <AppBar />
         <BoardBar />
-        <BoardContent boardId={id}/>
+        <BoardContent boardProps={board}/>
       </div>
     )
   }
