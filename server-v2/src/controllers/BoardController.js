@@ -42,12 +42,21 @@ const create = async (req, res) => {
 
 const getDetailBoard = async (req, res) => {
   try {
-    const id = req.params.id
+    const { id, userId } = req.params
     const board = await BoardService.getDetailBoard(id)
-    res.status(200).json({
-      success: true,
-      board
-    })
+    if ((board.private && (board.userId == userId || board.members.includes(userId))) || (board.private == false)) {
+      res.status(200).json({
+        success: true,
+        board
+      })
+    } else {
+      res.status(401).json({
+        success: false,
+        message: 'This board is private!',
+        private: true
+      })
+    }
+    
   } catch (error) {
     return res.status(500).json({
       errors: error.message

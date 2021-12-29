@@ -106,6 +106,11 @@ const AuthContextProvider = ({ children }) => {
 
   // Log out
   const logout = async () => {
+    setShowToast({
+      show: false,
+      message: '',
+      type: null
+    })
     dispatch({
       type: 'SET_LOADING',
       payload: true

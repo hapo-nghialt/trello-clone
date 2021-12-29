@@ -17,7 +17,7 @@ router.post(
 )
 
 router.get(
-  '/:id',
+  '/:id/:userId',
   BoardController.getDetailBoard
 )
 

@@ -30,9 +30,17 @@ let Board = new Schema({
     type: Boolean,
     default: false
   },
+  private: {
+    type: Boolean,
+    default: true
+  },
   userId: {
     type: Schema.Types.ObjectId,
     ref: 'User',
+  },
+  members: {
+    type: Array,
+    default: []
   }
 }, {
   versionKey: false

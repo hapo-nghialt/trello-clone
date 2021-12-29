@@ -21,7 +21,11 @@ function Homepage() {
   }, [])
 
   return (
-    <div>
+    <div style={{
+      width: '100%',
+      height: '100vh',
+      backgroundColor: '#fafbfc'
+    }}>
       <AppBar />
       <div style={{
         display: 'flex',
@@ -49,7 +53,8 @@ function Homepage() {
                         backgroundImage: board.background.type == 'image' && 'url("' + board.background.content + '")'
                       }}
                     >
-                      <span>{board.title}</span>
+                      <span className='board-title-fade'></span>
+                      <div className='board-details-name'>{board.title}</div>
                     </Link>
                   </li>
                 ))}
@@ -57,7 +62,7 @@ function Homepage() {
                   <Button
                     type='primary'
                     onClick={() => setVisible(true)}
-                    className='board-title'
+                    className='board-title create-new-board'
                     style={{
                       width: '100%'
                     }}

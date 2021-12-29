@@ -1,9 +1,10 @@
 import axios from 'axios'
-import React, { createContext, useEffect, useReducer } from 'react'
+import React, { createContext, useContext, useReducer } from 'react'
 import { boardReducer } from 'reducer/boardReducer'
 import { API_ROOT } from 'utilities/constants'
 import { sleep } from 'utilities/sleep'
-import { CREATE_BOARD, GET_ALL_BOARDS, GET_ALL_BOARDS_FALSE, GET_DETAIL_BOARD } from './constants'
+import { AuthContext } from './AuthContext'
+import { BOARD_PRIVATE, CREATE_BOARD, GET_ALL_BOARDS, GET_ALL_BOARDS_FALSE, GET_DETAIL_BOARD, SET_LOADING } from './constants'
 
 export const BoardContext = createContext()
 
@@ -14,6 +15,12 @@ const BoardContextProvider = ({ children }) => {
     boards: [],
     boardsLoading: true
   })
+
+  const {
+    authState: {
+      user
+    }
+  } = useContext(AuthContext)
 
   // Get all boards
   const getAllBoards = async () => {
@@ -36,19 +43,20 @@ const BoardContextProvider = ({ children }) => {
   const getBoardDetail = async (id) => {
     try {
       dispatch({
-        type: 'SET_LOADING',
+        type: SET_LOADING,
         payload: true
       })
-      const response = await axios.get(`${API_ROOT}/boards/${id}`)
       await sleep(1000)
+      const response = await axios.get(`${API_ROOT}/boards/${id}/${user._id}`)
       if (response.data.success) {
         dispatch({
           type: GET_DETAIL_BOARD,
           payload: response.data.board
         })
-        return response.data.board
+        return response.data
       }
     } catch (error) {
+      console.log(error.response.data)
       if (error.response.data) return error.response.data
     }
   }

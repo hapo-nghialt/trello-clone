@@ -5,6 +5,7 @@ import { useParams } from 'react-router'
 import AppBar from '../../components/AppBar/AppBar'
 import BoardBar from '../../components/BoardBar/BoardBar'
 import BoardContent from '../../components/BoardContent/BoardContent'
+import { useHistory } from 'react-router'
 
 function BoardDetail() {
   const { id } = useParams()
@@ -14,8 +15,14 @@ function BoardDetail() {
     boardState: { board, boardsLoading }
   } = useContext(BoardContext)
 
+  const history = useHistory()
+
   useEffect(() => {
-    getBoardDetail(id)
+    getBoardDetail(id).then(response => {
+      if (response.success == false && response.private == true) {
+        history.push('/private')
+      }
+    })
   }, [])
 
   let body

@@ -27,6 +27,7 @@ function RegisterForm() {
       message: registerData.message,
       type: registerData.success ? 'success' : 'danger'
     })
+    setButtonDisabled(false)
   }
 
   return (

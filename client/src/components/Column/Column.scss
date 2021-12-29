@@ -97,6 +97,7 @@ $column-height: calc(#{$board-content-height} - #{$gap * 2});
   }
 
   .card-list {
+    padding-top: 10px;
     margin: 0;
     max-height: calc(#{$column-height} - #{$column-part-height * 2});
     overflow-y: auto;

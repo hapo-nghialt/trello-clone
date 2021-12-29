@@ -29,14 +29,54 @@
       margin: 16px 16px 0 0;
     }
 
+    .board-title,
+    .board-title-fade,
+    .board-details-name {
+      border-radius: 5px;
+
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.4);
+      }
+    }
+
     .board-title {
       display: block;
       height: 96px;
-      border-radius: 3px;
-      padding: 8px;
-      color: #fff;
       font-weight: bold;
       font-size: 16px;
+      position: relative;
+      background-size: cover;
+      background-position: 50%;
+
+      .board-title-fade {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        background-color: rgba(0, 0, 0, 0.2);
+      }
+
+      .board-details-name {
+        color: #fff;
+        position: relative;
+        width: 100%;
+        padding: 8px;
+        height: 100%;
+      }
+    }
+
+    .create-new-board {
+      font-weight: 400;
+      background-color: #f0f2f5;
+      color: #172b4d;
+      font-size: 14px;
+      text-shadow: none;
+      border: none;
+
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.2);
+      }
     }
   }
 }

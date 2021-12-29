@@ -1,5 +1,5 @@
 import Column from '../Column/Column'
-import React, { useContext, useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { cloneDeep, isEmpty } from 'lodash'
 import './BoardContent.scss'
 
@@ -119,7 +119,7 @@ export default function BoardContent(props) {
     }
 
     const newColumnToAdd = {
-      boardProps: board._id,
+      boardId: board._id,
       title: newColumnTitle.trim()
     }
 

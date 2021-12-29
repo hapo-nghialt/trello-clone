@@ -1,6 +1,6 @@
 import './App.scss'
 import React from 'react'
-import BoardDetail from 'pages/BoardDetail/BoardDetail'
+import BoardDetail from 'pages/BoardDetail'
 import AuthContextProvider from 'contexts/AuthContext'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import Landing from 'components/Landing/Landing'
