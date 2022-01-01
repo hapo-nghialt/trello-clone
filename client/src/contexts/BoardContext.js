@@ -4,7 +4,7 @@ import { boardReducer } from 'reducer/boardReducer'
 import { API_ROOT } from 'utilities/constants'
 import { sleep } from 'utilities/sleep'
 import { AuthContext } from './AuthContext'
-import { BOARD_PRIVATE, CREATE_BOARD, GET_ALL_BOARDS, GET_ALL_BOARDS_FALSE, GET_DETAIL_BOARD, SET_LOADING } from './constants'
+import { CREATE_BOARD, GET_ALL_BOARDS, GET_ALL_BOARDS_FALSE, GET_DETAIL_BOARD, SET_LOADING } from './constants'
 
 export const BoardContext = createContext()
 
@@ -56,7 +56,6 @@ const BoardContextProvider = ({ children }) => {
         return response.data
       }
     } catch (error) {
-      console.log(error.response.data)
       if (error.response.data) return error.response.data
     }
   }

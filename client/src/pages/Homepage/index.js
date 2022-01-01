@@ -5,7 +5,7 @@ import { BoardContext } from 'contexts/BoardContext'
 import React, { useContext, useEffect, useState } from 'react'
 import { Bookmarks } from 'react-bootstrap-icons'
 import { Link } from 'react-router-dom'
-import './Homepage.scss'
+import './style.scss'
 
 function Homepage() {
   const [visible, setVisible] = useState(false)

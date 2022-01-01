@@ -7,7 +7,9 @@ import { Link } from 'react-router-dom'
 
 import imgLogo from '../../assets/img/img-logo.png'
 
-export default function AppBar() {
+export default function AppBar(props) {
+  const { backgroundColor } = props
+
   const {
     logout,
     authState: {
@@ -25,7 +27,8 @@ export default function AppBar() {
   )
 
   return (
-    <nav className='navbar-app'>
+    <nav className='navbar-app'
+      style={{ backgroundColor: backgroundColor }}>
       <Link to={`../${user.username}/boards`}>
         <img src={imgLogo} style={{ height: '44px' }} />
       </Link>

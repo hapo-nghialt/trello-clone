@@ -4,7 +4,7 @@ import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import landing_1 from '../../assets/img/landing/landing_1.png'
 import { Redirect } from 'react-router'
-import './Landing.scss'
+import './style.scss'
 
 function Landing() {
   const {
