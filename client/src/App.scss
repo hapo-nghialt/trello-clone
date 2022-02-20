@@ -80,7 +80,7 @@ h3, h4, h5, h6 {
   }
 
   .smooth-dnd-container {
-    min-height: 0;
+    min-height: 5px;
   }
 }
 
@@ -90,6 +90,16 @@ h3, h4, h5, h6 {
 
 .ant-form-item-children-icon {
   line-height: 14px !important;
+}
+
+.ant-btn:hover, .ant-btn:focus {
+  color: #000000 !important;
+  border-color: #000000 !important;
+  outline: none !important;
+}
+
+.ant-popover-arrow-content {
+  display: none !important;
 }
 
 ul {

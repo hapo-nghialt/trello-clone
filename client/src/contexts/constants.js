@@ -4,4 +4,4 @@ export const GET_ALL_BOARDS = 'GET_ALL_BOARDS'
 export const GET_DETAIL_BOARD = 'GET_DETAIL_BOARD'
 export const SET_LOADING = 'SET_LOADING'
 
-// dispatch action private board
+export const SEARCH_USERS = 'SEARCH_USERS'

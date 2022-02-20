@@ -3,6 +3,7 @@ import { authRoutes } from './auth'
 import { boardRoutes } from './board'
 import { cardRoutes } from './card'
 import { columnRoutes } from './column'
+import { userRoutes } from './user'
 
 const router = express.Router()
 
@@ -11,6 +12,8 @@ router.get('/status', (req, res) => {
 })
 
 router.use('/boards', boardRoutes)
+
+router.use('/users', userRoutes)
 
 router.use('/columns', columnRoutes)
 

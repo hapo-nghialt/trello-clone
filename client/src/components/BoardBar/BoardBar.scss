@@ -5,4 +5,38 @@
   padding-left: $gap;
   display: flex;
   align-items: center;
+
+  .invite-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 4px 12px;
+    border-radius: 5px;
+    margin-left: 200px;
+
+    &:hover {
+      background-color: #ffffffe6;
+    }
+  }
+}
+
+.invite-popover {
+  width: 300px;
+
+  .ant-popover-title {
+    height: 40px;
+    margin: 0 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .ant-popover-inner {
+    border-radius: 3px;
+    box-shadow: 0 8px 16px -4px #091e4240,0 0 0 1px #091e4214;
+
+    input {
+      margin-bottom: 5px;
+    }
+  }
 }
