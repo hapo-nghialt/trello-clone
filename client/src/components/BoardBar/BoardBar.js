@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react'
-import { Button, Input, Popover } from 'antd'
+import { Button, Input, Popover, Tag } from 'antd'
 import { UserAddOutlined } from '@ant-design/icons'
 import './BoardBar.scss'
 import { UserContext } from 'contexts/UserContext'
@@ -8,6 +8,7 @@ import SearchContent from './SearchContent/SearchContent'
 export default function BoardBar() {
   const [search, setSearch] = useState('')
   const [searchContent, setSearchContent] = useState('')
+  const [active, setActive] = useState('')
 
   const {
     searchUser
@@ -35,12 +36,29 @@ export default function BoardBar() {
   const text = <span>Invite to board</span>
   const content = (
     <>
-      <Input
-        placeholder='Email address or name'
-        value={search}
-        onChange={handleChange}
-      />
+      <div className={`input-search ${active}`}>
+        <Tag closable>
+          Tag 2
+        </Tag>
+        <Tag closable>
+          Tag 2
+        </Tag>
+        <Tag closable>
+          Tag 2
+        </Tag>
+        <Tag closable>
+          Tag 2
+        </Tag>
+        <Input
+          placeholder='Email address or name'
+          value={search}
+          onChange={handleChange}
+          onFocus={() => setActive('active')}
+          onBlur={() => setActive('')}
+        />
+      </div>
       { searchContent }
+      {/* <Button className='send-invitation'>Send invitation</Button> */}
     </>
   )
 

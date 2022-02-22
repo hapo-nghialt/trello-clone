@@ -35,8 +35,39 @@
     border-radius: 3px;
     box-shadow: 0 8px 16px -4px #091e4240,0 0 0 1px #091e4214;
 
-    input {
-      margin-bottom: 5px;
+    .input-search {
+      display: flex;
+      flex-flow: row wrap;
+      box-shadow: inset 0 0 0 2px #dfe1e6;
+      padding: 4px 8px;
+
+      &.active {
+        box-shadow: inset 0 0 0 2px #0079bf;
+      }
+
+      .ant-tag {
+        margin: 4px 8px 4px 0;
+      }
     }
+
+    input {
+      margin: 3px 7px 3px 0;
+      padding: 0 !important;
+      border: none !important;
+      width: auto !important;
+
+      &:focus {
+        box-shadow: none !important;
+      }
+    }
+  }
+
+  .send-invitation {
+    width: 100%;
+    border: none;
+    background-color: #0079bf !important;
+    color: #ffffff !important;
+    border-radius: 3px;
+    margin-top: 8px;
   }
 }
