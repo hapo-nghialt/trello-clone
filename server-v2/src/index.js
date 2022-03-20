@@ -2,6 +2,7 @@ import express, { json } from 'express'
 import cors from 'cors'
 import { connect } from 'mongoose'
 import router from './routes'
+import { seedDB } from './seeds/seed'
 const app = express()
 const port = 8000
 const hostname = 'localhost'

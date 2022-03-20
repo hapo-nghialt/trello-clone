@@ -1,9 +1,15 @@
-import { UserModel } from "../models/User"
+import { UserModel } from '../models/User'
 
 const get = async (req, res) => {
   try {
-    const { keyword } = req.query
-    const users = await UserModel.find({ username: { $regex: keyword, $options: 'i' } });
+    const { keyword, userIds } = req.query
+    const users = await UserModel.find({
+      $or: [
+        {username: { $regex: keyword, $options: 'i' }},
+        {email: { $regex: keyword, $options: 'i' }}
+      ],
+      _id: {$nin: userIds}
+    });
     return res.status(200).json({
       success: true,
       users
@@ -14,8 +20,6 @@ const get = async (req, res) => {
     })
   }
 }
-
-// const addMemberToBoard = 
 
 export const UserController = {
   get

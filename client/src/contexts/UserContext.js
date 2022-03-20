@@ -12,11 +12,12 @@ const UserContextProvider = ({ children }) => {
     usersLoading: true
   })
 
-  const searchUser = async (search) => {
+  const searchUser = async (search, userIds) => {
     try {
       const response = await axios.get(`${API_ROOT}/users`, {
         params: {
-          keyword: search.trim()
+          keyword: search.trim(),
+          userIds
         }
       })
       dispatch({

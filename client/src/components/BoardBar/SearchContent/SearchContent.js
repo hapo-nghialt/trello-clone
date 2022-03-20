@@ -5,7 +5,7 @@ import React, { useContext } from 'react'
 import './SearchContent.scss'
 
 export default function SearchContent(props) {
-  const { keyword } = props
+  const { keyword, onActionAddMember } = props
 
   const {
     userState: {
@@ -13,18 +13,22 @@ export default function SearchContent(props) {
     }
   } = useContext(UserContext)
 
-  const handleAddMember = (id) => {
+  const handleAddMember = (user) => {
+    onActionAddMember(user)
   }
 
   return (
     <Card className='search-content'>
       {(users.length > 0 && keyword.length >= 3) ? users.map((user, index) => (
         <div key={index}>
-          <div className='search-item' onClick={() => handleAddMember(user._id)}>
+          <div className='search-item' onClick={() => handleAddMember(user)}>
             <Avatar className='avatar' size='default'>
               {user.username.charAt(0).toUpperCase()}
             </Avatar>
-            {user.username}
+            <div className='info-user'>
+              <span>{user.username}</span>
+              <span className='email'>{user.email}</span>
+            </div>
           </div>
         </div>
       )) :

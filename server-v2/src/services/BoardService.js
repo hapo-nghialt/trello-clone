@@ -44,7 +44,8 @@ const update = async (id, data) => {
 
     const result = await BoardModel.findOneAndUpdate(
       { _id: id },
-      updatedData
+      updatedData,
+      { new: true }
     )
 
     return result
@@ -53,22 +54,8 @@ const update = async (id, data) => {
   }
 }
 
-const addMemberToBoard = async (boardId, userId) => {
-  try {
-    const result = await BoardModel.findOneAndUpdate(
-      { _id: boardId },
-      { $push: { members: ObjectId(userId) } },
-      { new: true }
-    )
-    return result.value
-  } catch (error) {
-    throw new Error(error)
-  }
-}
-
 export const BoardService = {
   updateColumnOrder,
   getDetailBoard,
-  update,
-  addMemberToBoard
+  update
 }

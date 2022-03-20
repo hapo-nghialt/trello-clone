@@ -2,6 +2,7 @@
   position: absolute !important;
   width: 268px;
   border-radius: 5px !important;
+  z-index: 1;
 
   .ant-card-body {
     max-height: 200px;
@@ -46,6 +47,9 @@
   .search-item {
     padding: 5px;
     cursor: pointer;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
 
     &:hover {
       background-color: #091e420a;
@@ -53,6 +57,19 @@
 
     .ant-avatar {
       margin-right: 10px;
+      display: flex;
+    }
+
+    .info-user {
+      display: flex;
+      max-width: 80%;
+      flex-wrap: wrap;
+
+      .email {
+        font-size: 12px;
+        color: #888;
+        width: 100%;
+      }
     }
   }
 }

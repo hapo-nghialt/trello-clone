@@ -4,7 +4,7 @@ import { boardReducer } from 'reducer/boardReducer'
 import { API_ROOT } from 'utilities/constants'
 import { sleep } from 'utilities/sleep'
 import { AuthContext } from './AuthContext'
-import { CREATE_BOARD, GET_ALL_BOARDS, GET_ALL_BOARDS_FALSE, GET_DETAIL_BOARD, SET_LOADING } from './constants'
+import { CREATE_BOARD, GET_ALL_BOARDS, GET_ALL_BOARDS_FALSE, GET_DETAIL_BOARD, SET_LOADING, UPDATE_BOARD } from './constants'
 
 export const BoardContext = createContext()
 
@@ -76,10 +76,25 @@ const BoardContextProvider = ({ children }) => {
     }
   }
 
+  const updateBoard = async (id, data) => {
+    try {
+      const response = await axios.put(`${API_ROOT}/boards/${id}/update`, data)
+      if (response.status == 200) {
+        dispatch({
+          type: UPDATE_BOARD,
+          payload: response.data
+        })
+      }
+    } catch (error) {
+      if (error.response.data) return error.response.data
+    }
+  }
+
   const boardContextData = {
     createNewBoard,
     getBoardDetail,
     getAllBoards,
+    updateBoard,
     boardState
   }
   return (
